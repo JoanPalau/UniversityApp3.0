@@ -3,6 +3,14 @@ from django.views.generic import ListView
 from univoting.models.degree import Degree
 
 
+def home(request):
+    context = {
+        'title': 'UniApp',
+        'description': 'TEMP DESCRIPTION',
+    }
+    return render(request, 'univoting/home.html', context)
+
+
 class DegreeListView(ListView):
     model = Degree
     template_name = 'univoting/degree_list.html'

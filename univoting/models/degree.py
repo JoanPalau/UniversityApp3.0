@@ -1,8 +1,8 @@
 import re
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator
 from django.utils.translation import gettext_lazy
 from django.db import models
-from django.core.validators import MaxLengthValidator, MinValueValidator
 
 
 class University(models.Model):
@@ -18,8 +18,10 @@ def validate_title(value):
 
 
 class Degree(models.Model):
+    MAX_VALUE = 600
+
     title = models.CharField(validators=[validate_title], max_length=64)
-    ects = models.IntegerField(validators=[MaxLengthValidator(600), MinValueValidator(1)])
+    ects = models.PositiveSmallIntegerField(validators=[MaxValueValidator(MAX_VALUE)])
     description = models.TextField()
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 

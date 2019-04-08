@@ -1,5 +1,33 @@
+ @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
+ body {
+   overflow-x: hidden;
+   font-family: 'Lato', sans-serif;
+   color: #505962
+ }
 
+ /*--- Navbar ---*/
+ .navbar {
+   text-transform: uppercase;
+   font-weight: 700;
+   font-size: .9rem;
+   letter-spacing: .1rem;
+   background: rgba(0, 0, 0, .6)!important;
+ }
+
+ .navbar-var li {
+   padding-right: .7rem;
+ }
+
+ .navbar-dark .navbar-nav .nav-link {
+   color: white;
+   padding-top: .8rem;
+ }
+
+ .navbar-dark .navbar-nav .nav-link.active,
+ .navbar-dark .navbar-nav .nav-link:hover {
+    color: #1EBBA3;
+ }
 
 /*============= COURSE SECTION =============*/
 

@@ -29,6 +29,12 @@
     color: #1EBBA3;
  }
 
+ /*--- Slider ---*/
+ .carousel-item {
+     background-size: cover;
+     height: 100vh;
+ }
+
 /*============= COURSE SECTION =============*/
 
 .narrow {

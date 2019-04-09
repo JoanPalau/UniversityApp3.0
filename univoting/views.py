@@ -33,6 +33,14 @@ class DegreeListView(ListView):
 def universities_mock(request):
     context = {
         'title': 'Universities',
+        'universities':
+            {
+                ('Harvard', 'image1.jpg', 'This is the Harvard university description.'),
+                ('MIT', 'image2.jpg', 'This is the MIT university description.'),
+                ('Stanford', 'image3.jpg', 'This is the Stanford university description.'),
+                ('Universitat de Lleida', 'udl.jpg', 'This is the Universitat de Lleida description.'),
+                ('Oxford', 'oxford.png', 'This is the Oxford university description.'),
+            },
         'description': 'This is the universities page description.',
     }
     return render(request, 'univoting/universities.html', context)

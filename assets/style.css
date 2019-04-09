@@ -35,7 +35,19 @@
      height: 100vh;
  }
 
-/*============= COURSE SECTION =============*/
+ /*--- Cards ---*/
+.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}
+
+.visitButton {
+    width:10rem;
+    padding:5px;
+}
+
+
+/*============= OTHER SECTION =============*/
 
 .narrow {
   width: 75%;

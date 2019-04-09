@@ -18,6 +18,7 @@ class Course(models.Model):
 
     class Meta:
         ordering = ['course']
+        unique_together = {'degree_id', 'subject_id'}
 
     def __str__(self):
         return "{} {} {}".format(self.degree_id.title, self.subject_id.name, self.course)

@@ -5,7 +5,7 @@ from univoting.models.degree import Degree
 
 def home(request):
     context = {
-        'title': 'UniApp',
+        'title': 'Home',
         'description': 'TEMP DESCRIPTION',
     }
     return render(request, 'univoting/home.html', context)
@@ -28,3 +28,11 @@ class DegreeListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degrees'
         return context
+
+
+def universities_mock(request):
+    context = {
+        'title': 'Universities',
+        'description': 'This is the universities page description.',
+    }
+    return render(request, 'univoting/universities.html', context)

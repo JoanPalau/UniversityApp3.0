@@ -44,3 +44,41 @@ def universities_mock(request):
         'description': 'This is the universities page description.',
     }
     return render(request, 'univoting/universities.html', context)
+
+
+def university_mock(request):
+    context = {
+        'title': 'Universitat de Lleida',
+        'name': 'Universitat de Lleida',
+        'description': 'This is the universities page description.',
+        'picture': 'image1.jpg',
+        'degrees': {
+            'Anthropology',
+            'Architecture, Landscape Architecture, and Urban Planning',
+            'Astronomy',
+            'Biophysics',
+            'Business Administration',
+            'Business Economics',
+            'Celtic Languages and Literatures',
+            'The Classics',
+            'Computer science',
+            'Data Science ',
+            'Economics',
+            'Education',
+            'Engineering and Applied Sciences',
+            'English',
+            'Germanic Languages and Literatures',
+            'Inner Asian and Altaic Studies',
+            'Materials Science and Mechanical Engineering',
+            'Mathematics',
+            'Near Eastern Languages and Civilizations',
+            'Philosophy',
+            'Physics',
+            'Political Economy and Government',
+            'Population Health Sciences',
+            'Regional Studies–Russia, Eastern Europe, and Central Asia',
+            'Speech and Hearing Bioscience and Technology ',
+            'Virology ',
+            }
+    }
+    return render(request, 'univoting/university.html', context)

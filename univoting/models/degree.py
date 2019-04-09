@@ -3,10 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator
 from django.utils.translation import gettext_lazy
 from django.db import models
-
-
-class University(models.Model):
-    pass
+from univoting.models.university import University
 
 
 def validate_title(value):

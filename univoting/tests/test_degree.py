@@ -1,6 +1,7 @@
 from django.test import TestCase
 from parameterized import parameterized
-from univoting.models.degree import Degree, University
+from univoting.models.degree import Degree
+from univoting.models.university import University
 from django.core import management
 
 

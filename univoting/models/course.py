@@ -15,3 +15,9 @@ class Course(models.Model):
     degree_id = models.ForeignKey(degree.Degree, on_delete=models.CASCADE)
     subject_id = models.ForeignKey(subject.Subject, on_delete=models.CASCADE)
     course = models.SmallIntegerField(choices=COURSE_LIST)
+
+    class Meta:
+        ordering = ['course']
+
+    def __str__(self):
+        return "{} {} {}".format(self.degree_id.title, self.subject_id.name, self.course)

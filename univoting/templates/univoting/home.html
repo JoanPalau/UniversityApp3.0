@@ -14,7 +14,12 @@
 
             <div class="carousel-inner" role="listbox">
                 <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url('{% static "image1.jpg" %}')";></div>
+                <div class="carousel-item active" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image1.jpg" %}')";></div>
                 <div class="carousel-caption text-center">
                     <h1>Welcome to UniApp</h1>
                     <h3>Where you can find your perfect university</h3>
@@ -22,10 +27,19 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="carousel-item" style="background-image: url('{% static "image2.jpg" %}')";></div>
+                <div class="carousel-item" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image2.jpg" %}')";></div>
                 <!-- Slide 3 -->
-                <div class="carousel-item" style="background-image: url('{% static "image3.jpg" %}')";></div>
-
+                <div class="carousel-item" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image3.jpg" %}')";></div>
             </div> <!-- End Carousel Inner -->
 
             <!-- Prev & Next Buttons -->
@@ -40,9 +54,17 @@
 
     <!-- END IMAGE SLIDER -->
 
-    <div id="about">
-        <h1>ABOUT SECTION</h1>
+    <!-- ABOUT SECTION -->
+    <div id="about" class="jumbotron container-fluid">
+        <h3 class="heading text-center">ABOUT</h3>
+        <div class="heading-underline"></div>
     </div>
+
+    <div class="narrow text-center">
+        <p class=""lead>The application to find the best university for you.</p>
+    </div>
+
+    <!-- END ABOUT SECTION -->
 
     {% include "univoting/footer.html" %}
 

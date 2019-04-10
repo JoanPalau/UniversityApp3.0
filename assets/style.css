@@ -75,6 +75,24 @@
     padding:5px;
 }
 
+.jumbotron-about {
+    border-radius: 0;
+    padding: 3rem 0 2rem;
+}
+
+h3.heading {
+    font-size: 1.9rem;
+    font-weight:700;
+    text-transform: uppercase;
+    padding-bottom: 1.9rem;
+}
+
+.heading-underline {
+    width: 3rem;
+    height: .2rem;
+    background-color: #1EBBA3;
+    margin: 0 auto 1rem;
+}
 
 /*============= OTHER SECTION =============*/
 

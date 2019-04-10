@@ -33,7 +33,6 @@ class DegreeListView(ListView):
         return context
 
 
-<<<<<<< HEAD
 def universities_mock(request):
     context = {
         'title': 'Universities',
@@ -86,7 +85,8 @@ def university_mock(request):
             }
     }
     return render(request, 'univoting/university.html', context)
-=======
+
+
 class DegreeDetailView(DetailView):
     model = Degree
     context_object_name = 'degree'
@@ -122,4 +122,3 @@ class UniversityListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Universities'
         return context
->>>>>>> 2b5cd6e97bfce776a3ff8f6c6abc68cfc274d96f

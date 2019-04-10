@@ -10,30 +10,26 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     {% if title == 'Home' %}
-                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link active" href="#home">Home</a>
                     {% else %}
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
-                    {% if title == 'Universities' %}
-                        <a class="nav-link active" href="{% url 'universities' %}">Universities</a>
+                    <a class="nav-link active" href="{% url 'universities' %}">Universities</a>
+                </li>
+                <li class="nav-item">
+                    {% if title == 'Home' %}
+                        <a class="nav-link" href="#about">About</a>
                     {% else %}
-                        <a class="nav-link" href="{% url 'universities' %}">Universities</a>
+                        <a class="nav-link" href="{% url 'home' %}#about">About</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
-                    {% if title == 'About' %}
-                        <a class="nav-link active" href="#">About</a>
+                    {% if title == 'Home' %}
+                        <a class="nav-link" href="#contact">Contact</a>
                     {% else %}
-                        <a class="nav-link" href="#">About</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if title == 'Contact' %}
-                        <a class="nav-link active" href="#">Contact</a>
-                    {% else %}
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
                     {% endif %}
                 </li>
             </ul>

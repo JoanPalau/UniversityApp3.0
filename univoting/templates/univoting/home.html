@@ -4,38 +4,45 @@
 
 {% block content%}
     <!-- START IMAGE SLIDER -->
-    <div id="carouselIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselIndicators" data-slide-to="2"></li>
-        </ol>
+    <div id="home">
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+            </ol>
 
-        <div class="carousel-inner" role="listbox">
-            <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url('{% static "image1.jpg" %}')";></div>
-            <div class="carousel-caption text-center">
-                <h1>Welcome to UniApp</h1>
-                <h3>Where you can find your perfect university</h3>
-                <a class="btn btn-outline-light btn-lg" href="#">Get Started</a> <!-- This link goes to universities -->
-            </div>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('{% static "image1.jpg" %}')";></div>
+                <div class="carousel-caption text-center">
+                    <h1>Welcome to UniApp</h1>
+                    <h3>Where you can find your perfect university</h3>
+                    <a class="btn btn-outline-light btn-lg" href="#">Get Started</a> <!-- This link goes to universities -->
+                </div>
 
-            <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url('{% static "image2.jpg" %}')";></div>
-            <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url('{% static "image3.jpg" %}')";></div>
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('{% static "image2.jpg" %}')";></div>
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url('{% static "image3.jpg" %}')";></div>
 
-        </div> <!-- End Carousel Inner -->
+            </div> <!-- End Carousel Inner -->
 
-        <!-- Prev & Next Buttons -->
-        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+            <!-- Prev & Next Buttons -->
+            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
     </div>
+
     <!-- END IMAGE SLIDER -->
+
+    <div id="about">
+        <h1>ABOUT SECTION</h1>
+    </div>
 
     {% include "univoting/footer.html" %}
 

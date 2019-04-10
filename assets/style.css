@@ -75,24 +75,29 @@
     padding:5px;
 }
 
-.jumbotron-about {
+.content-section {
+    height: 100vh;
+}
+
+.jumbotron {
     border-radius: 0;
-    /*padding: 3rem 0 2rem;*/
-    padding: 6rem 0 2rem;
+    padding: 4rem 0 2rem;
 }
 
 h3.heading {
     font-size: 1.9rem;
     font-weight:700;
     text-transform: uppercase;
-    padding-bottom: 1.9rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 
 .heading-underline {
     width: 3rem;
     height: .2rem;
     background-color: #1EBBA3;
-    margin: 0 auto 1rem;
+    /*margin: 0 auto 1rem;*/
+    margin: 0 auto 0;
 }
 
 .title-group-item {
@@ -105,12 +110,17 @@ h3.heading {
     font-weight:700;
     text-transform: uppercase;
 }
-
+/*
 .container-about {
-    margin-top: 2rem;
-    margin-bottom: 10rem;
+    margin-top: 4rem;
+    margin-bottom: 6rem;
 }
 
+.container-contact {
+    margin-top: 10rem;
+    margin-bottom: 5.5rem;
+}
+*/
 .img-team {
     border: 1px solid #ddd;
     border-radius: 4px;

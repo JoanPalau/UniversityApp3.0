@@ -1,0 +1,55 @@
+{% extends "univoting/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+       <!-- Header -->
+    <div class="jumbotron container-fluid">
+        <h3 class="heading mt-2 text-center"> Degree </h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-5">
+
+            <h3 class="heading mt-2 text-center">Curses</h3>
+
+            <div id="accordion" class="container">
+
+                {% for curse in curses %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ curse }}">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ curse }}" aria-expanded="true" aria-controls="collapse{{ curse }}">
+                                {{ curse }} Curse
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapse{{ curse }}" class="collapse" aria-labelledby="heading{{ curse }}" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                {% for subject in subjects %}
+                                    <li><a href="#">{{ subject }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="col-md-5">
+            <div class="header-content-right">
+                <h3 class="heading mt-2 text-center">{{ name }}</h3>
+                <p class="mt-4">
+                    {{ description }}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

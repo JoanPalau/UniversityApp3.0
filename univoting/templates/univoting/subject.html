@@ -1,0 +1,67 @@
+{% extends "univoting/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+       <!-- Header -->
+    <div class="jumbotron container-fluid">
+        <h3 class="heading mt-2 text-center"> Subject </h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-6">
+            <h3 class="heading mt-2 text-center">{{ name }}</h3>
+
+            <div class="subject-box", id="textbox">
+                <h5 class="alignleft mt-2 ml-2">Difficulty: {{ difficulty }}</h5>
+                <h5 class="alignright mt-2 mr-2">Mark: {{ mark }}</h5>
+            </div>
+            <div style="clear: both;"></div>
+            <!--
+            <div class="subject-box" style="clear: both">
+                <h5 class="qualifications-left mx-4 my-4">Difficulty: {{ difficulty }}</h5>
+                <h5 class="qualifications-right mx-4">Mark: {{ mark }}</h5>
+            </div>
+            -->
+            <p class="mt-4">
+                {{ description }}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <div class="header-content-right">
+                <h3 class="heading mt-2 text-center">Comments</h3>
+            </div>
+            <div class="scroll-panel">
+                {% if not comments %}
+                    <p class="text-center mt-4 italic-comment">
+                        There is no comments in this section for now.
+                    </p>
+                {% else %}
+                    {% for comment in comments %}
+                        <div class="card border-success mb-3">
+                            <div class="card-header bg-transparent border-success">Header</div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">comment</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                </div>
+                            <div class="card-footer bg-transparent border-success">Date</div>
+                        </div>
+                        <!--
+                        <h6 class="heading">comment</h6>
+                        <p class="mt-4">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <div class="small-heading-underline"></div>
+                        -->
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

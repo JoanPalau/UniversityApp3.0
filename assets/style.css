@@ -100,6 +100,21 @@ h3.heading {
     margin: 0 auto 0;
 }
 
+h6.heading {
+    font-size: 1rem;
+    font-weight:700;
+    text-transform: uppercase;
+    padding-bottom: 0rem;
+    padding-top: 2rem;
+}
+
+.small-heading-underline {
+    width: 5rem;
+    height: .05rem;
+    background-color: #1EBBA3;
+    margin: 0 auto 0;
+}
+
 .title-group-item {
     background-color: #1EBBA3;
 }
@@ -126,6 +141,31 @@ h3.heading {
     border-radius: 4px;
     padding: 5px;
     width: 150px;
+}
+
+.scroll-panel {
+    height: 51vh;
+    overflow-y: scroll;
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 4px;*/
+}
+
+.subject-box{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.alignleft {
+    /*display:inline;*/
+    float: left;
+}
+
+.alignright {
+    float: right;
+}
+
+.italic-comment {
+    font-style: italic;
 }
 
 /*============= OTHER SECTION =============*/

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class Location(models.Model):
 
@@ -6,8 +8,11 @@ class Location(models.Model):
     zipcode = models.CharField(max_length=8)
     city = models.CharField(max_length=32)
     country = models.CharField(max_length=32)
-    lat = models.FloatField()
-    long = models.FloatField()
+    lat = models.FloatField(verbose_name='Latitude', validators=[MaxValueValidator(90), MinValueValidator(-90)])
+    long = models.FloatField(verbose_name='Longitude', validators=[MaxValueValidator(-180), MinValueValidator(180)])
 
     def __str__(self):
         return "{} [{}] {}".format(self.address, self.city, self.country)
+
+    class Meta:
+        unique_together = ('lat', 'long')

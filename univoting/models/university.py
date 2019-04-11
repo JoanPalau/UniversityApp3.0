@@ -1,6 +1,8 @@
 import re
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy
 from django.db import models
+from django.urls import reverse
 from univoting.models.location import Location
 
 
@@ -11,6 +13,7 @@ def validate_phone_number(value):
             params={'value': value}
         )
 
+
 class University(models.Model):
 
     name = models.CharField(max_length=64)
@@ -20,6 +23,8 @@ class University(models.Model):
     def __str__(self):
         return "{} [{}]".format(self.name, self.telephone)
 
+    def get_absolute_url(self):
+        return reverse('univoting:university-detail', kwargs={'pk': self.pk})
 
     @staticmethod
     def create(name, telephone, location):

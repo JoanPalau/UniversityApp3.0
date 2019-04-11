@@ -87,6 +87,26 @@ def university_mock(request):
     return render(request, 'univoting/university.html', context)
 
 
+def degree_mock(request):
+    context = {
+        'name': 'Degree Example',
+        'description': 'This is a description.',
+        'curses': {'First', 'Second', 'Third', 'Fourth'},
+        'subjects': {
+                'Subject Example1',
+                'Subject Example2',
+                'Subject Example3',
+                'Subject Example4',
+                'Subject Example5',
+                'Subject Example6',
+                'Subject Example7',
+                'Subject Example8',
+            }
+        }
+
+    return render(request, 'univoting/degree.html', context)
+
+
 class DegreeDetailView(DetailView):
     model = Degree
     context_object_name = 'degree'

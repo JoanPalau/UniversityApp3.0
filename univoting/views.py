@@ -107,6 +107,23 @@ def degree_mock(request):
     return render(request, 'univoting/degree.html', context)
 
 
+def subject_mock(request):
+    context = {
+        'name': 'Subject Example',
+        'description': 'This is a description.',
+        'comments': {
+            'First comment',
+            'Second comment',
+            'Third comment',
+            'Forth comment'
+        },
+        'mark': 7.5,
+        'difficulty': 6.2,
+    }
+
+    return render(request, 'univoting/subject.html', context)
+
+
 class DegreeDetailView(DetailView):
     model = Degree
     context_object_name = 'degree'

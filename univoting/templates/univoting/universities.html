@@ -1,0 +1,29 @@
+{% extends "univoting/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+    <!-- Header -->
+    <div class="jumbotron container-fluid">
+        <h3 class="heading mt-2 text-center">Universities</h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <!-- Cards -->
+    {% for uni in universities %}
+    <div class="row padding justify-content-center">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                {% with ''|add:uni.1 as image_static %}
+                    <img class="card-img-top" src="{%  static image_static  %}" alt="{{ uni.0 }} campus">
+                {% endwith %}
+              <div class="card-body">
+                <h5 class="card-title">{{ uni.0 }}</h5>
+                <p class="card-text">{{ uni.2 }} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <a href="#" class="btn btn-outline-primary visitButton">Visit</a>
+              </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock content %}

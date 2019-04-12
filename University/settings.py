@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'univoting.apps.UnivotingConfig',
     'users.apps.UsersConfig',
     'markdown_deux',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +126,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+LOGIN_REDIRECT_URL = 'home'

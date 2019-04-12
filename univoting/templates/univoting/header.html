@@ -7,6 +7,7 @@
             </button>
         </div>
         <div class="navbar-collapse collapse" id="collapsingNavbar">
+
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     {% if title == 'Home' %}
@@ -36,7 +37,27 @@
                         <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
                     {% endif %}
                 </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                     {% if "/login/" in request.path %}
+                         <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+                         </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
             </ul>
+
         </div>
     </div>
 </nav>

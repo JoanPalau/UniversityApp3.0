@@ -15,7 +15,8 @@
     {% if title %}
         <title>UniApp - {{ title }}</title>
     {% else %}
-        <title>SampleTitle</title>
+        <!--<title>SampleTitle</title>-->
+        <title>UniApp - {% block title %}{% endblock %}</title>
     {% endif %}
 
   </head>

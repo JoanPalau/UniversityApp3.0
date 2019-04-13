@@ -13,14 +13,18 @@
     <div class="row padding justify-content-center">
         <div class="col-md-8">
             <div class="card mb-3">
-                {% with ''|add:uni.1 as image_static %}
-                    <img class="card-img-top" src="{%  static image_static  %}" alt="{{ uni.0 }} campus">
+
+                {% with ''|add:uni.picture as image_static %}
+                    <img class="card-img-top" src="{%  static image_static  %}" alt="{{ uni.name }} campus">
                 {% endwith %}
+
               <div class="card-body">
-                <h5 class="card-title">{{ uni.0 }}</h5>
-                <p class="card-text">{{ uni.2 }} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a href="#" class="btn btn-outline-primary visitButton">Visit</a>
+
+                <h5 class="card-title">{{ uni.name }}</h5>
+                <p class="card-text">{{ uni.description }}
+
               </div>
+                <a href="#" class="btn btn-outline-primary visitButton ml-4 mb-4">Visit</a>
             </div>
         </div>
     </div>

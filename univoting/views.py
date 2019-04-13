@@ -153,7 +153,7 @@ class SubjectDetailView(DetailView):
 class UniversityListView(ListView):
     model = University
     context_object_name = 'universities'
-    # template_name = '' No template yet
+    template_name = 'univoting/universities.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

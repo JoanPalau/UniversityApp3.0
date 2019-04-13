@@ -38,7 +38,7 @@ def universities_mock(request):
         'title': 'Universities',
         'universities':
             {
-                ('Harvard', 'image1.jpg', 'This is the Harvard university description.'),
+                ('Harvard', 'noimage.png', 'This is the Harvard university description.'),
                 ('MIT', 'image2.jpg', 'This is the MIT university description.'),
                 ('Stanford', 'image3.jpg', 'This is the Stanford university description.'),
                 ('Universitat de Lleida', 'udl.jpg', 'This is the Universitat de Lleida description.'),

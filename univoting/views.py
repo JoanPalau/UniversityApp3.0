@@ -4,6 +4,8 @@ from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
 from univoting.models.degree import University
+from univoting.models.subject_review import SubjectReview
+from univoting.models.subject_comment import SubjectComment
 
 
 def home(request):
@@ -64,6 +66,7 @@ class SubjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = context['subject'].name
+        context['comments'] = SubjectComment.objects.filter(subject=context['subject'])
         return context
 
 #

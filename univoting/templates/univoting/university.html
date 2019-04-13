@@ -28,6 +28,19 @@
             </div>
         </div>
 
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <lu class="list-group">
+                    {% for degree in degrees %}
+                        <li class="list-group-item">
+                            <a class="ml-4" href="#"> {{ degree.title }} </a>
+                        </li>
+                    {% endfor %}
+                </lu>
+            </div>
+        </div>
+
     </div>
 
 {% endblock content %}

@@ -15,6 +15,62 @@ def home(request):
     return render(request, 'univoting/home.html', context)
 
 
+class UniversityListView(ListView):
+    model = University
+    context_object_name = 'universities'
+    template_name = 'univoting/universities.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Universities'
+        return context
+
+
+class UniversityDetailView(DetailView):
+    model = University
+    context_object_name = 'university'
+    template_name = 'univoting/university.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['university'].name
+
+        # Obtain list of university degrees
+        degrees = Degree.objects.filter(university=context['university'])
+        context['degrees'] = degrees
+        return context
+
+
+class DegreeDetailView(DetailView):
+    model = Degree
+    context_object_name = 'degree'
+    template_name = 'univoting/degree.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['degree'].title
+
+        # Obtain list of subjects with their course for the Degree
+        subjects = Course.objects.filter(degree_id=context['degree'])
+        context['subjects'] = subjects
+        return context
+
+
+class SubjectDetailView(DetailView):
+    model = Subject
+    context_object_name = 'subject'
+    template_name = 'univoting/degree.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['subject'].name
+        return context
+
+#
+#########################################################################################
+#                           MOCK UPs
+
+
 def universities_mock(request):
     context = {
         'title': 'Universities',
@@ -105,54 +161,5 @@ def subject_mock(request):
 
     return render(request, 'univoting/subject.html', context)
 
-
-class DegreeDetailView(DetailView):
-    model = Degree
-    context_object_name = 'degree'
-    template_name = 'univoting/degree.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = context['degree'].title
-
-        # Obtain list of subjects with their course for the Degree
-        subjects = Course.objects.filter(degree_id=context['degree'])
-        context['subjects'] = subjects
-        return context
-
-
-class SubjectDetailView(DetailView):
-    model = Subject
-    context_object_name = 'subject'
-    template_name = 'univoting/degree.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = context['subject'].name
-        return context
-
-
-class UniversityListView(ListView):
-    model = University
-    context_object_name = 'universities'
-    template_name = 'univoting/universities.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Universities'
-        return context
-
-
-class UniversityDetailView(DetailView):
-    model = University
-    context_object_name = 'university'
-    template_name = 'univoting/university.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = context['university'].name
-
-        # Obtain list of university degrees
-        degrees = Degree.objects.filter(university=context['university'])
-        context['degrees'] = degrees
-        return context
+#####################################################################################################
+#

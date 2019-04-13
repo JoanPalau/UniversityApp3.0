@@ -61,7 +61,7 @@ class DegreeDetailView(DetailView):
 class SubjectDetailView(DetailView):
     model = Subject
     context_object_name = 'subject'
-    template_name = 'univoting/degree.html'
+    template_name = 'univoting/subject.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

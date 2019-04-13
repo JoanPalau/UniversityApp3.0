@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <ul>
                                 {% for subject in course.list %}
-                                    <li><a href="{% url 'subject' subject.pk %}">{{ subject }}</a></li>
+                                    <li><a href="{% url 'subject' degree.pk subject.pk %}">{{ subject }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

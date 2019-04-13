@@ -29,6 +29,9 @@ class SubjectReview(models.Model):
     def __str__(self):
         return "{} {} {}".format(self.mark, self.difficulty, self.workVolume, self.amount)
 
+    def get_rpr(self):
+        return self.WORK_LIST[self.workVolume][1]
+
     def get_absolute_url(self):
         return reverse('univoting:subject_detail', kwargs={'pk': self.pk})
 

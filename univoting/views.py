@@ -170,7 +170,9 @@ class UniversityDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.model.name
 
+        '''
         # Obtain list of university degrees
         degrees = Degree.objects.filter(university=self.model.pk)
         context['degrees'] = degrees
+        '''
         return context

@@ -1,1 +1,1 @@
-web: gunicorn myrecommendations.wsgi
+web: gunicorn University.wsgi

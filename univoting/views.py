@@ -159,3 +159,18 @@ class UniversityListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Universities'
         return context
+
+
+class UniversityDetailView(DetailView):
+    model = University
+    context_object_name = 'university'
+    template_name = 'univoting/university.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.model.name
+
+        # Obtain list of university degrees
+        degrees = Degree.objects.filter(university=self.model.pk)
+        context['degrees'] = degrees
+        return context

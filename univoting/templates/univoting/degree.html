@@ -38,9 +38,9 @@
 
                     <div id="collapse{{ course.grouper }}" class="collapse" aria-labelledby="heading{{ course.grouper }}" data-parent="#accordion">
                         <div class="card-body">
-                            <ul>
+                            <ul class="list-group">
                                 {% for subject in course.list %}
-                                    <li><a href="{% url 'subject' degree.pk subject.pk %}">{{ subject }}</a></li>
+                                    <li class="list-group-item"><a href="{% url 'subject' degree.pk subject.pk %}">{{ subject }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

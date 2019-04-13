@@ -4,7 +4,7 @@
 {% block content %}
     <!-- Header -->
     <div class="jumbotron container-fluid">
-        <h3 class="heading mt-2 text-center">{{ object.name }}</h3>
+        <h3 class="heading mt-2 text-center">{{ university.name }}</h3>
         <div class="heading-underline"></div>
     </div>
 
@@ -12,8 +12,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="header-content-left">
-                    {% with ''|add:object.picture as image_static %}
-                        <img src="{%  static image_static  %}" alt="{{ object.name }} campus" style="width: 100%;">
+                    {% with ''|add:university.picture as image_static %}
+                        <img src="{%  static image_static  %}" alt="{{ university.name }} campus" style="width: 100%;">
                     {% endwith %}
                 </div>
             </div>
@@ -22,7 +22,7 @@
                  <div class="header-content-right">
                      <h3 class="mt-4">Welcome to our campus</h3>
                     <p class="mt-4">
-                        {{ object.description }}
+                        {{ university.description }}
                     </p>
                  </div>
             </div>

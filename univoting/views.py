@@ -127,14 +127,14 @@ def subject_mock(request):
 class DegreeDetailView(DetailView):
     model = Degree
     context_object_name = 'degree'
-    # template_name = '' No template yet
+    template_name = 'univoting/degree.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.model.title
+        context['title'] = context['degree'].title
 
         # Obtain list of subjects with their course for the Degree
-        subjects = Course.objects.filter(degree_id=self.model.pk)
+        subjects = Course.objects.filter(degree_id=context['degree'])
         context['subjects'] = subjects
         return context
 
@@ -142,11 +142,11 @@ class DegreeDetailView(DetailView):
 class SubjectDetailView(DetailView):
     model = Subject
     context_object_name = 'subject'
-    # template_name = '' No template yet
+    template_name = 'univoting/degree.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.model.name
+        context['title'] = context['subject'].name
         return context
 
 
@@ -173,6 +173,4 @@ class UniversityDetailView(DetailView):
         # Obtain list of university degrees
         degrees = Degree.objects.filter(university=context['university'])
         context['degrees'] = degrees
-        print(degrees)
-
         return context

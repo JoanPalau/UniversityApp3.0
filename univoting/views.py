@@ -8,7 +8,7 @@ from univoting.models.degree import University
 
 def home(request):
     context = {
-        'title': 'UniApp',
+        'title': 'Home',
         'description': 'TEMP DESCRIPTION',
     }
     return render(request, 'univoting/home.html', context)
@@ -31,6 +31,97 @@ class DegreeListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degrees'
         return context
+
+
+def universities_mock(request):
+    context = {
+        'title': 'Universities',
+        'universities':
+            {
+                ('Harvard', 'noimage.png', 'This is the Harvard university description.'),
+                ('MIT', 'image2.jpg', 'This is the MIT university description.'),
+                ('Stanford', 'image3.jpg', 'This is the Stanford university description.'),
+                ('Universitat de Lleida', 'udl.jpg', 'This is the Universitat de Lleida description.'),
+                ('Oxford', 'oxford.png', 'This is the Oxford university description.'),
+            },
+        'description': 'This is the universities page description.',
+    }
+    return render(request, 'univoting/universities.html', context)
+
+
+def university_mock(request):
+    context = {
+        'title': 'Universitat de Lleida',
+        'name': 'Universitat de Lleida',
+        'description': 'This is the universities page description.',
+        'picture': 'image1.jpg',
+        'degrees': {
+            'Anthropology',
+            'Architecture, Landscape Architecture, and Urban Planning',
+            'Astronomy',
+            'Biophysics',
+            'Business Administration',
+            'Business Economics',
+            'Celtic Languages and Literatures',
+            'The Classics',
+            'Computer science',
+            'Data Science ',
+            'Economics',
+            'Education',
+            'Engineering and Applied Sciences',
+            'English',
+            'Germanic Languages and Literatures',
+            'Inner Asian and Altaic Studies',
+            'Materials Science and Mechanical Engineering',
+            'Mathematics',
+            'Near Eastern Languages and Civilizations',
+            'Philosophy',
+            'Physics',
+            'Political Economy and Government',
+            'Population Health Sciences',
+            'Regional Studies–Russia, Eastern Europe, and Central Asia',
+            'Speech and Hearing Bioscience and Technology ',
+            'Virology ',
+            }
+    }
+    return render(request, 'univoting/university.html', context)
+
+
+def degree_mock(request):
+    context = {
+        'name': 'Degree Example',
+        'description': 'This is a description.',
+        'curses': {'First', 'Second', 'Third', 'Fourth'},
+        'subjects': {
+                'Subject Example1',
+                'Subject Example2',
+                'Subject Example3',
+                'Subject Example4',
+                'Subject Example5',
+                'Subject Example6',
+                'Subject Example7',
+                'Subject Example8',
+            }
+        }
+
+    return render(request, 'univoting/degree.html', context)
+
+
+def subject_mock(request):
+    context = {
+        'name': 'Subject Example',
+        'description': 'This is a description.',
+        'comments': {
+            'First comment',
+            'Second comment',
+            'Third comment',
+            'Forth comment'
+        },
+        'mark': 7.5,
+        'difficulty': 6.2,
+    }
+
+    return render(request, 'univoting/subject.html', context)
 
 
 class DegreeDetailView(DetailView):
@@ -62,9 +153,24 @@ class SubjectDetailView(DetailView):
 class UniversityListView(ListView):
     model = University
     context_object_name = 'universities'
-    # template_name = '' No template yet
+    template_name = 'univoting/universities.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Universities'
+        return context
+
+
+class UniversityDetailView(DetailView):
+    model = University
+    context_object_name = 'university'
+    template_name = 'univoting/university.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.model.name
+
+        # Obtain list of university degrees
+        degrees = Degree.objects.filter(university=self.model.pk)
+        context['degrees'] = degrees
         return context

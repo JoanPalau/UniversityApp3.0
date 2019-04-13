@@ -1,21 +1,107 @@
 {% extends "univoting/base.html" %}
+{% load static from staticfiles %}
 {% load markdown_deux_tags %}
-{% block content%}
 
-<main role="main" class="container-fluid"></main>
-    <div class="row">
-        <div class="col-sm-8">
-          <br>
-          <br>
-            <div class="web-name">
-                <h1><b>UniApp</b></h1>
-            </div>
-            <div style="text-align: justify" class="col-sm-12">
-               <!-- {{ description.text|markdown }}-->
-               <br>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
+{% block content%}
+    <!-- START IMAGE SLIDER -->
+    <div id="home">
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image1.jpg" %}')";></div>
+                <div class="carousel-caption text-center">
+                    <h1>Welcome to UniApp</h1>
+                    <h3>Where you can find your perfect university</h3>
+                    <a class="btn btn-outline-light btn-lg" href="{% url 'universities' %}">Get Started</a> <!-- This link goes to universities -->
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image2.jpg" %}')";></div>
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image:
+                        linear-gradient(
+                        rgba(0, 0, 0, 0.25),
+                        rgba(0, 0, 0, 0.25)
+                        ),
+                        url('{% static "image3.jpg" %}')";></div>
+            </div> <!-- End Carousel Inner -->
+
+            <!-- Prev & Next Buttons -->
+            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
         </div>
     </div>
 
+    <!-- END IMAGE SLIDER -->
+
+    <!-- ABOUT SECTION -->
+    <section class="content-section">
+        <div id="about" class="jumbotron container-fluid jumbotron-about">
+            <h3 class="heading text-center">ABOUT</h3>
+            <div class="heading-underline"></div>
+        </div>
+
+        <div class="container container-about">
+            <div class="row">
+                <div class="col-md-6">
+                    <lu class="list-group">
+                        <li class="list-group-item title-group-item">
+                            <h6 class="title-item">Team Facts</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 1: this is a good fact!</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 2: this is even better!!</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 3: this one is the best!!!</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 4: this is not that good, but we need put something else.</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 5: this is not that good, but we need put something else.</h6>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Fact 6: this is not that good, but we need put something else.</h6>
+                        </li>
+                    </lu>
+                </div>
+
+                 <div class="col-md-6">
+                     <div class="header-content-left">
+                         <img class="img-team" src="{%  static 'team.jpg'  %}" alt="The UniApp Team" style="width: 95%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- END ABOUT SECTION -->
+    <section class="content-section">
+        {% include "univoting/footer.html" %}
+    </section>
+
 {% endblock content %}
+

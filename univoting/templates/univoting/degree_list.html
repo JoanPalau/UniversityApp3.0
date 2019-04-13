@@ -1,15 +1,9 @@
 {% extends "univoting/base.html" %}
-
 {% block content %}
-
     <br>
     <h2>This is the Degrees list</h2>
     <br>
-
     {% for degree in object_list %}
-
         <p>{{ degree.title }}</p>
-
     {% endfor %}
-
 {% endblock content %}

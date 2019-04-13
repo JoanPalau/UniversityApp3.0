@@ -17,8 +17,10 @@ def validate_phone_number(value):
 class University(models.Model):
 
     name = models.CharField(max_length=64)
-    telephone = models.CharField(validators=[validate_phone_number], max_length=12)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    description = models.TextField(default='No description for now.')
+    picture = models.CharField(max_length=32, default='noimage.png')
+    telephone = models.CharField(validators=[validate_phone_number], max_length=12, blank=True)
+    location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} [{}]".format(self.name, self.telephone)

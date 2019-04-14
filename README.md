@@ -4,8 +4,11 @@ UniversityApp és una aplicació web que permet consultar informació sobre dive
 
 Cal destacar que en aquesta primera entrega, el lloc web és 1.0, és a dir, els usuaris no produiran contingut a la web, sinó que solament visitaran el contingut introduït pels administradors.
 
-El codi font d'aquest projecte està disponible en el següent enllaç:
+El codi font en producció d'aquest projecte està disponible en el següent enllaç:
+
 [https://github.com/ntorrent/UniversityApp1.0](https://github.com/ntorrent/UniversityApp1.0)
+
+Podeu trobar l'aplicació en funcionament a:
 
 [Web desplegada](https://univoting.herokuapp.com/)
 

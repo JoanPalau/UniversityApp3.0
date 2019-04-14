@@ -9,25 +9,35 @@ El codi font d'aquest projecte està disponible en el següent enllaç:
 
 [Web desplegada](https://univoting.herokuapp.com/)
 
-Com executar l'aplicació
-========================
+Com executar l'aplicació (entorn desenvolupament)
+=================================================
 
-Modificar !!!
-
-Des del directori arrel del projecte executar:
+Des del directori arrel del projecte executar per tenir el software que necessita l' aplicació:
 ```bash
 $ pip3 install -r requirements.txt
 ```
+**En cas de voler executar l'aplicació sense dades**
+
 Fer les migracions
 ```bash
 $ python3 manage.py makemigrations
 
 $ python3 manage.py migrate
 ```
+
+**En cas de voler executar l'aplicació amb dades de prova**
+
+La segúent comanda s'encarrega de borrar les dades actuals, generar-ne de noves, fer les migracions i crear un superusuari amb nom **admin** i contrasenya **password**
+```bash
+$ bash tools/generate_db.sh
+```
+
 Executar el servidor
 ```bash
 $ python manage.py runserver
 ```
+
+
 
 Modificacions respecte el model de dades entregat al *preassignment*
 ====================================================================
@@ -60,8 +70,8 @@ Representades per l'entitat **Subject**.
 Les assignatures pertanyen a un curs de cada grau, el qual es representa en l'entitat **Course**. Els cursos poden estar només entre 1r i 5è (es considera que cap grau té més de 5 cursos).
 
 
-Deployment a Heroku
-===================
+Deployment a Heroku (entorn producció)
+======================================
 
 Per tal de fer el deploy a Heroku s'ha especificat en el fitxer [Procfile](./Procfile) el tipus de servidor que ha d'executar django.
 
@@ -74,8 +84,8 @@ Un cop realitzat el deploy a l'aplicació cal executar la comanda següent per g
 $ heroku run bash tools/generate_db.sh
 ```
 
-Deployment amb Docker
-=====================
+Deployment amb Docker (entorn producció)
+========================================
 
 Per tal de fer un deploy amb Docker s'ha creat un fitxer [Dockerfile](./Dockerfile) i un fitxer [docker-compose-yml](./docker-compose.yml)
 

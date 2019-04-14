@@ -21,7 +21,7 @@ def make_database():
             descr = description.readline()
             add_universities(path + '/data/university.data', hdescr, descr)
             add_degrees(path + '/data/degree.data', hdescr, descr)
-            # add_subjects(path + '/data/subjects.data', hdescr, descr)
+            add_subjects(path + '/data/subjects.data', hdescr, descr)
 
 
 def add_universities(filename, head_description, description):

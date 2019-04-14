@@ -79,16 +79,40 @@
             <div class="card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    {{ best_subjects.0.subject_id.name }}
-                    Mark: {{ best_subjects.0.subject_id.review.get_mark_rpr }}
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk best_subjects.0.subject_id.pk %}">
+                        {{ best_subjects.0.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ best_subjects.0.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
                 <li class="list-group-item">
-                    {{ best_subjects.1.subject_id.name }}
-                    Mark: {{ best_subjects.1.subject_id.review.get_mark_rpr }}
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk best_subjects.1.subject_id.pk %}">
+                        {{ best_subjects.1.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ best_subjects.1.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
                 <li class="list-group-item">
-                    {{ best_subjects.2.subject_id.name }}
-                    Mark: {{ best_subjects.2.subject_id.review.get_mark_rpr }}
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk best_subjects.2.subject_id.pk %}">
+                        {{ best_subjects.2.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ best_subjects.2.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -99,17 +123,41 @@
             <h6 class="heading mt-2 text-center"> WORST QUALIFIED </h6>
             <div class="card">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    {{ worst_subjects.0.subject_id.name }}
-                    Mark: {{ worst_subjects.0.subject_id.review.get_mark_rpr }}
+                                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk worst_subjects.0.subject_id.pk %}">
+                        {{ worst_subjects.0.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ worst_subjects.0.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
                 <li class="list-group-item">
-                    {{ worst_subjects.1.subject_id.name }}
-                    Mark: {{ worst_subjects.1.subject_id.review.get_mark_rpr }}
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk worst_subjects.1.subject_id.pk %}">
+                        {{ worst_subjects.1.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ worst_subjects.1.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
                 <li class="list-group-item">
-                    {{ worst_subjects.2.subject_id.name }}
-                    Mark: {{ worst_subjects.2.subject_id.review.get_mark_rpr }}
+                  <div class="row">
+                    <div class="col-sm-6" style="text-align: left">
+                      <a href="{% url 'subject' degree.pk worst_subjects.2.subject_id.pk %}">
+                        {{ worst_subjects.2.subject_id.name }}
+                      </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: right">
+                      Mark: {{ worst_subjects.2.subject_id.review.get_mark_rpr }}
+                    </div>
+                  </div>
                 </li>
               </ul>
             </div>

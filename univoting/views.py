@@ -57,7 +57,13 @@ class DegreeDetailView(DetailView):
         context['subjects'] = subjects
 
         # Obtain list of best and worst subjects
-        context['worst_subjects'], context['best_subjects'] = get_top_for_degrees(3, subjects)
+        subjects_qualified = []
+        for subject in subjects.all():
+            if subject.subject_id.review:
+                subjects_qualified.append(subject)
+
+        context['worst_subjects'], context['best_subjects'] = \
+            get_top_for_degrees(3, subjects_qualified)
 
         return context
 
@@ -71,14 +77,13 @@ class SubjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = context['subject'].name
         context['comments'] = SubjectComment.objects.filter(subject=context['subject'])
-        # context['course'] = get_object_or_404(Course, subject_id=context['subject'])
-        context['course'] = Course.objects.get(subject_id=context['subject'])
+        context['course'] = get_object_or_404(Course, subject_id=context['subject'])
         return context
 
 
 def get_top_for_degrees(maximum, listed):
-    worst_qualifies = sorted(listed.all(), key=lambda item: item.subject_id.review.mark)
-    best_qualifies = list(reversed(sorted(listed.all(), key=lambda item: item.subject_id.review.mark)))
+    worst_qualifies = sorted(listed, key=lambda item: item.subject_id.review.mark)
+    best_qualifies = list(reversed(sorted(listed, key=lambda item: item.subject_id.review.mark)))
     # Check for maximum qualified items
     if listed:
         length = len(listed)

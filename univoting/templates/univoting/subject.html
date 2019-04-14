@@ -2,76 +2,80 @@
 {% load static from staticfiles %}
 
 {% block content %}
-       <!-- Header -->
-    <div class="jumbotron container-fluid">
-        <h3 class="heading mt-2 text-center"> Subject </h3>
-        <div class="heading-underline"></div>
+  <!-- Header -->
+  <div class="jumbotron container-fluid">
+    <h3 class="heading mt-2 text-center"> Subject </h3>
+    <div class="heading-underline"></div>
+  </div>
+
+  <div class="row justify-content-md-center">
+
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'universities' %}">Universities</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'university' course.degree_id.university.pk %}">
+              {{ course.degree_id.university.name }}
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'degree' course.degree_id.pk %}">{{ course.degree_id.title }}</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+        </ol>
+      </nav>
     </div>
 
-    <div class="row justify-content-md-center">
 
-        <div class="col-md-10">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'universities' %}">Universities</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'university' course.degree_id.university.pk %}">
-                            {{ course.degree_id.university.name }}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'degree' course.degree_id.pk %}">{{ course.degree_id.title }}</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="col-md-6 mr-5">
+      <h3 class="heading mt-2 text-center">{{ subject.name }}</h3>
 
-
-        <div class="col-md-6 mr-5">
-            <h3 class="heading mt-2 text-center">{{ subject.name }}</h3>
-
-            <div class="subject-box", id="textbox">
-                <h5 class="alignleft mt-2 ml-2">Difficulty: {{ subject.review.get_difficulty_rpr }}</h5>
-                <h5 class="alignright mt-2 mr-2">Mark: {{ subject.review.get_mark_rpr }}</h5>
-            </div>
-            <div style="clear: both;"></div>
-            <p class="mt-4">
-                {{ subject.description }}
-            </p>
-            <hr/>
-            <h5 class="alignleft mt-2 mr-2">Work volume: {{ subject.review.get_rpr }}</h5>
-            <h5 class="alignright mt-2 mr-2">Ects: {{ subject.ects }}</h5>
-        </div>
-
-        <div class="col-md-4 ml-5">
-            <div class="header-content-right">
-                <h3 class="heading mt-2 text-center">Comments</h3>
-            </div>
-            <div class="scroll-panel">
-                {% if not comments %}
-                    <p class="text-center mt-4 italic-comment">
-                        There is no comments in this section for now.
-                    </p>
-                {% else %}
-                    {% for comment in comments %}
-                        <div class="card border-success mb-3">
-                            <div class="card-header bg-transparent border-success">User name</div>
-                                <div class="card-body text-success">
-                                    <h5 class="card-title">comment</h5>
-                                    <p class="card-text">
-                                        {{ comment }}
-                                    </p>
-                                </div>
-                            <div class="card-footer bg-transparent border-success">Date</div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
+      <div class="subject-box" , id="textbox">
+        {% if subject.review %}
+          <h5 class="alignleft mt-2 ml-2">Difficulty: {{ subject.review.get_difficulty_rpr }}</h5>
+          <h5 class="alignright mt-2 mr-2">Mark: {{ subject.review.get_mark_rpr }}</h5>
+        {% endif %}
+      </div>
+      <div style="clear: both;"></div>
+      <p class="mt-4">
+        {{ subject.description }}
+      </p>
+      <hr/>
+      {% if subject.review %}
+        <h5 class="alignleft mt-2 mr-2">Work volume: {{ subject.review.get_rpr }}</h5>
+      {% endif %}
+      <h5 class="alignright mt-2 mr-2">Ects: {{ subject.ects }}</h5>
     </div>
+
+    <div class="col-md-4 ml-5">
+      <div class="header-content-right">
+        <h3 class="heading mt-2 text-center">Comments</h3>
+      </div>
+      <div class="scroll-panel">
+        {% if not comments %}
+          <p class="text-center mt-4 italic-comment">
+            There is no comments in this section for now.
+          </p>
+        {% else %}
+          {% for comment in comments %}
+            <div class="card border-success mb-3">
+              <div class="card-header bg-transparent border-success">User name</div>
+              <div class="card-body text-success">
+                <h5 class="card-title">comment</h5>
+                <p class="card-text">
+                  {{ comment }}
+                </p>
+              </div>
+              <div class="card-footer bg-transparent border-success">Date</div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

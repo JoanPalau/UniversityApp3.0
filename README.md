@@ -49,26 +49,28 @@ En aquesta entrega s’ha modificat lleugerament el model de dades presentat en 
 
 En primer lloc, en comptes de dir que un grau pertany a una facultat es considera, de manera més genèrica, que un grau pertany a una universitat. Per tant, en comptes d’aparèixer la classe School apareix la classe University. D’aquesta classe University, se n’ha extret els atributs latitude i longitude, que representen la locatització de la universitat, i s’ha creat una classe específica Location, on a part d’aquests dos atributs latitude i longitude s’afegeixen atributs que representen l’adreça de manera textual. L’adreça textual s’introdueix al model, ja que serà la que es presentarà a l'usuari, en canvi la latitud i la longitud serviran sobretot per representar la localització en un mapa (el qual es preveu fer en la següent entrega, en la versió 2.0).
 
-En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia una complexitat innecessària en el model de dades, i se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
+En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia més complexitat en el model de dades. Com que en aquesta entrega l'aplicació web és 1.0, és a dir, l'administrador se n'ocupa de mantenir tot el contingut de la web, considerem prioritària aquesta reducció en la complexitat, fent el manteniment molt més assumible. A més a més, amb aquesta modificació se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
 
 
 Model de Dades
 ==============
-![Data Model](/docs/UML.png)
+![Data Model](/docs/Act1-WP.png)
 
 Tal com es veu en el diagrama, el model de dades està format principalment per les entitats University, Degree i Subject. Una universitat pot tenir un o multiples graus, i un grau pot tenir una o múltiples assignatures.
 
 - Universitats
+
 Representades per la entitat **University**. D'una universitat cal el seu nom, telèfon de contacte i localització. A les locatitzacions se la representa amb l'entitat **Location**, i està formada per els atributs address, areacode, city, i country que formen l'adreça textual, i la latitud i la longitud. Latitud i longitud caldran en la versió 2.0 en la qual es podrà mostrat en un mapa on es troba la universitat.
 
 - Graus
+
 Representats per l'entitat **Degree**. Estàn formats pel nom del grau, el total de crèdits ects que s'han de superar en tot el grau i una breu descripció d'en què consisteix el grau.
 
 - Assignatures
 
 Representades per l'entitat **Subject**.
 
-És només l'entitat Subject la que té comentaris i una qualificació global (els quals es representen com a Comment i SubjectQualification en el model). Per tant, es permetrà que cada assignatura tingui un o més comentaris i la seva qualificació global. Els comentaris estan representats per l'entitat **Comment**, i poden tenir una llargada màxima de 250 caràcters. Les qualificacions globals estan representades per l'entitat **SubjectQualification**, i estan formades per una nota numèrica entre 0 i 10, la dificultat, el volum de treball, i un comptador que denota el nombre de qualificacions que hi ha hagut (recordar que l'entitat representa la mitjana de totes les qualificacions). Cal destacar que la dificultat (atribut difficulty) i el volum de treball (atribut workVolume) només poden tenir un valor dels tres possibles (Low, Medium, High) representats per l'enum EVolume.
+És només l'entitat Subject la que té comentaris i una qualificació global (els quals es representen com a Comment i SubjectQualification en el model). Per tant, es permetrà que cada assignatura tingui un o més comentaris i la seva qualificació global. Els comentaris estan representats per l'entitat **Comment**, i poden tenir una llargada màxima de 250 caràcters. Les qualificacions globals estan representades per l'entitat **SubjectQualification**, i estan formades per una nota numèrica (atribut mark), la dificultat (atribut difficulty), el volum de treball (atribut workVolume), i un comptador que denota el nombre de qualificacions que hi ha hagut (atribut amount, recordar que l'entitat representa la mitjana de totes les qualificacions). Cal destacar que el volum de treball només pot tenir un valor dels tres possibles (Low, Medium, High) representats per l'enum EVolume.
 
 Les assignatures pertanyen a un curs de cada grau, el qual es representa en l'entitat **Course**. Els cursos poden estar només entre 1r i 5è (es considera que cap grau té més de 5 cursos).
 
@@ -78,11 +80,11 @@ Deployment a Heroku (entorn producció)
 
 Per tal de fer el deploy a Heroku s'ha especificat en el fitxer [Procfile](./Procfile) el tipus de servidor que ha d'executar django.
 
-A més a més s'ha emprat una aplicació externa, django_heroku que s'encarrega d'obtenir la informació descrita a heroku i als settings de l'aplicació per realitzar el deploy més facilment.
+A més a més s'ha emprat una aplicació externa, django_heroku que s'encarrega d'obtenir la informació descrita a heroku i als settings de l'aplicació per realitzar el deploy més fàcilment.
 
 Per tal de poder tenir els entorns de producció i desenvolupament separats, s'ha fixat a heroku la variable d'entorn DJANGO_SETTINGS_MODULE per executar el fitxer [settings_heroku.py](./University/settings_heroku.py)
 
-Un cop realitzat el deploy a l'aplicació cal executar la comanda següent per generar una bbdd pseudoaleatoria d'xemple a partir de les dades en els fitxers .data i un superusuari amb nom **admin** i contrassenya **password** per tal de poder accedir al panell d'administració de l'aplicació.
+Un cop realitzat el deploy a l'aplicació cal executar la comanda següent per generar una bbdd pseudoaleatòria d'exemple a partir de les dades en els fitxers .data i un superusuari amb nom **admin** i contrasenya **password** per tal de poder accedir al panell d'administració de l'aplicació.
 ```bash
 $ heroku run bash tools/generate_db.sh
 ```
@@ -96,7 +98,7 @@ La conjunció d'aquest dos fitxers crea un contenidor pel servidor de django i u
 
 A més a més, en el contenidor de django s'ha fixat la variable DJANGO_MODULE_SETTINGS per a executar el fitxer de settings [settings_docker.py](./University/seetings_docker.py) i així tenir els entorns de producció i desenvolupament separats.
 
-Altres dades que ara mateix es troben en el fitxer de settings haurien de ser també incloses en variables d'entorn si es tractes d'una aplicació real.
+Altres dades que ara mateix es troben en el fitxer de settings haurien de ser també incloses en variables d'entorn si es tractés d'una aplicació real.
 
 ### Com fer el deploy amb docker
 
@@ -104,7 +106,7 @@ Des del directori arrel del projecte (/UniversityApp1.0), creem els contenidors
 
 ```bash
 $ docker compose up -d
-``` 
+```
 
 Podem observar com s'han creat correctament i estan executant-se, per un costat tindrem el nom contenidor web i el nom contenidor bbdd
 
@@ -112,9 +114,9 @@ Podem observar com s'han creat correctament i estan executant-se, per un costat 
 docker ps
 ```
 
-Per tal de generar les dades de la bbdd, com en un entorn real no ho fariem directament a la construcció del docker, cal executar un script en bash que ens genereara la bbdd amb les dades de prova pseudoaleatories dels .data i genera un superusuari de nom **admin** amb contrasenya **password**:
+Per tal de generar les dades de la bbdd, com en un entorn real no ho faríem directament a la construcció del docker, cal executar un script en bash que ens generarà la bbdd amb les dades de prova pseudoaleatòries dels .data i genera un superusuari de nom **admin** amb contrasenya **password**:
 
-Aquest procès triga una estona, entre 30s i 1 min 30 s en els ordinadors on s'ha provat.
+Aquest procés triga una estona, entre 30s i 1 min 30 s en els ordinadors on s'ha provat.
 
 ```bash
 docker exec -d <nom contenidor web> bash tools/generate_db.sh

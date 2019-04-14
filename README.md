@@ -12,13 +12,13 @@ El codi font d'aquest projecte està disponible en el següent enllaç:
 Com executar l'aplicació (entorn desenvolupament)
 =================================================
 
-Des del directori arrel del projecte executar per tenir el software que necessita l' aplicació:
+1. Des del directori arrel del projecte executar per tenir el software que necessita l' aplicació:
 ```bash
 $ pip3 install -r requirements.txt
 ```
 **En cas de voler executar l'aplicació sense dades**
 
-Fer les migracions
+2. Fer les migracions
 ```bash
 $ python3 manage.py makemigrations
 
@@ -27,12 +27,12 @@ $ python3 manage.py migrate
 
 **En cas de voler executar l'aplicació amb dades de prova**
 
-La segúent comanda s'encarrega de borrar les dades actuals, generar-ne de noves, fer les migracions i crear un superusuari amb nom **admin** i contrasenya **password**
+2. La segúent comanda s'encarrega de borrar les dades actuals, generar-ne de noves, fer les migracions i crear un superusuari amb nom **admin** i contrasenya **password**
 ```bash
 $ bash tools/generate_db.sh
 ```
 
-Executar el servidor
+3 Executar el servidor
 ```bash
 $ python manage.py runserver
 ```

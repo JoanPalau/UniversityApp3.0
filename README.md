@@ -121,3 +121,8 @@ docker exec -d <nom contenidor web> bash tools/generate_db.sh
 ```
 
 Un cop generada la bbdd, ja podem anar al localhost, port 8000 i ja ens trobarem a la pàgina web
+
+Proposta servidors
+==================
+
+La proposta pel desplegament en varis servidors la pot trobar en [aquest document](./docs/proposta_deploy.md).

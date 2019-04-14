@@ -77,8 +77,7 @@ class SubjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = context['subject'].name
         context['comments'] = SubjectComment.objects.filter(subject=context['subject'])
-        # context['course'] = get_object_or_404(Course, subject_id=context['subject'])
-        context['course'] = Course.objects.get(subject_id=context['subject'])
+        context['course'] = get_object_or_404(Course, subject_id=context['subject'])
         return context
 
 

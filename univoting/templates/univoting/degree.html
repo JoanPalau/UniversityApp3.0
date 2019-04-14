@@ -22,15 +22,15 @@
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ course.grouper }}" aria-expanded="true" aria-controls="collapse{{ course }}">
                                 <!--{{ course }} Course-->
                                 {% if forloop.counter == 1 %}
-                                    <h6>Primer</h6>
+                                    <h6>First course</h6>
                                 {% elif forloop.counter == 2 %}
-                                    <h6>Segon</h6>
+                                    <h6>Second course</h6>
                                 {% elif forloop.counter == 3 %}
-                                    <h6>Tercer</h6>
+                                    <h6>Third course</h6>
                                 {% elif forloop.counter == 4 %}
-                                    <h6>Quart</h6>
+                                    <h6>Fourth course</h6>
                                 {% elif forloop.counter == 5 %}
-                                    <h6>Cinquè</h6>
+                                    <h6>Fifth course</h6>
                                 {% endif %}
                             </button>
                         </h5>
@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <ul class="list-group">
                                 {% for subject in course.list %}
-                                    <li class="list-group-item"><a href="{% url 'subject' degree.pk subject.pk %}">{{ subject }}</a></li>
+                                    <li class="list-group-item"><a href="{% url 'subject' degree.pk subject.pk %}">{{ subject.subject_id.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

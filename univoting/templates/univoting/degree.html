@@ -9,7 +9,7 @@
     </div>
 
     <div class="row justify-content-md-center">
-        <div class="col-md-5">
+        <div class="col-md-5 mr-4">
             <h3 class="heading mt-2 text-center">Curses</h3>
             <div id="accordion" class="container">
 
@@ -46,14 +46,11 @@
                         </div>
                     </div>
                 </div>
-
                 {% endfor %}
-
             </div>
-
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5 ml-4">
             <div class="header-content-right">
                 <h3 class="heading mt-2 text-center">{{ degree.title }}</h3>
                 <p class="mt-4">
@@ -63,4 +60,50 @@
         </div>
     </div>
 
+    <div class="row justify-content-md-center">
+        <div class="col-md-5 mr-4">
+            <h6 class="heading mt-2 text-center"> BEST QUALIFIED </h6>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{ best_subjects.0.subject_id.name }}
+                    Mark: {{ best_subjects.0.subject_id.review.get_mark_rpr }}
+                </li>
+                <li class="list-group-item">
+                    {{ best_subjects.1.subject_id.name }}
+                    Mark: {{ best_subjects.1.subject_id.review.get_mark_rpr }}
+                </li>
+                <li class="list-group-item">
+                    {{ best_subjects.2.subject_id.name }}
+                    Mark: {{ best_subjects.2.subject_id.review.get_mark_rpr }}
+                </li>
+              </ul>
+            </div>
+        </div>
+
+        <div class="col-md-5 ml-4">
+            <!--<div class="header-content-right">-->
+            <h6 class="heading mt-2 text-center"> WORST QUALIFIED </h6>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{ worst_subjects.0.subject_id.name }}
+                    Mark: {{ worst_subjects.0.subject_id.review.get_mark_rpr }}
+                </li>
+                <li class="list-group-item">
+                    {{ worst_subjects.1.subject_id.name }}
+                    Mark: {{ worst_subjects.1.subject_id.review.get_mark_rpr }}
+                </li>
+                <li class="list-group-item">
+                    {{ worst_subjects.2.subject_id.name }}
+                    Mark: {{ worst_subjects.2.subject_id.review.get_mark_rpr }}
+                </li>
+              </ul>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+
+    <br/>
+    <br/>
 {% endblock %}

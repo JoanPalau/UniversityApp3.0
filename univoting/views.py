@@ -55,6 +55,10 @@ class DegreeDetailView(DetailView):
         # Obtain list of subjects with their course for the Degree
         subjects = Course.objects.filter(degree_id=context['degree'])
         context['subjects'] = subjects
+
+        # Obtain list of best and worst subjects
+        context['worst_subjects'], context['best_subjects'] = get_top_for_degrees(3, subjects)
+
         return context
 
 
@@ -68,6 +72,19 @@ class SubjectDetailView(DetailView):
         context['title'] = context['subject'].name
         context['comments'] = SubjectComment.objects.filter(subject=context['subject'])
         return context
+
+
+def get_top_for_degrees(maximum, listed):
+    worst_qualifies = sorted(listed.all(), key=lambda item: item.subject_id.review.mark)
+    best_qualifies= list(reversed(sorted(listed.all(), key=lambda item: item.subject_id.review.mark)))
+    # Check for maximum qualified items
+    if listed:
+        length = len(listed)
+        if length >= maximum:
+            best_qualifies = best_qualifies[:maximum]
+            worst_qualifies = worst_qualifies[:maximum]
+
+    return worst_qualifies, best_qualifies
 
 #
 #########################################################################################

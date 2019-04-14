@@ -106,7 +106,7 @@ Des del directori arrel del projecte (/UniversityApp1.0), creem els contenidors
 $ docker compose up -d
 ``` 
 
-Podem observar com s'han creat correctament i estan executant-se, per un costat tindrem el <nom contenidor web> i el <nom contenidor bbdd>
+Podem observar com s'han creat correctament i estan executant-se, per un costat tindrem el nom contenidor web i el nom contenidor bbdd
 
 ```bash
 docker ps

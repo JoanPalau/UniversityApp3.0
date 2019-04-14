@@ -10,6 +10,27 @@
 
     <div class="row justify-content-md-center">
 
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'universities' %}">Universities</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'university' course.degree_id.university.pk %}">
+                            {{ course.degree_id.university.name }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'degree' course.degree_id.pk %}">{{ course.degree_id.title }}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                </ol>
+            </nav>
+        </div>
+
+
         <div class="col-md-6 mr-5">
             <h3 class="heading mt-2 text-center">{{ subject.name }}</h3>
 

@@ -49,7 +49,7 @@ En aquesta entrega s’ha modificat lleugerament el model de dades presentat en 
 
 En primer lloc, en comptes de dir que un grau pertany a una facultat es considera, de manera més genèrica, que un grau pertany a una universitat. Per tant, en comptes d’aparèixer la classe School apareix la classe University. D’aquesta classe University, se n’ha extret els atributs latitude i longitude, que representen la locatització de la universitat, i s’ha creat una classe específica Location, on a part d’aquests dos atributs latitude i longitude s’afegeixen atributs que representen l’adreça de manera textual. L’adreça textual s’introdueix al model, ja que serà la que es presentarà a l'usuari, en canvi la latitud i la longitud serviran sobretot per representar la localització en un mapa (el qual es preveu fer en la següent entrega, en la versió 2.0).
 
-En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia una complexitat innecessària en el model de dades, i se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
+En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia més complexitat en el model de dades. Com que en aquesta entrega l'aplicació web és 1.0, és a dir, l'administrador se n'ocupa de mantenir tot el contingut de la web, considerem prioritària aquesta reducció en la complexitat, fent el manteniment molt més assumible. A més a més, amb aquesta modificació se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
 
 
 Model de Dades

@@ -7,7 +7,7 @@ Cal destacar que en aquesta primera entrega, el lloc web és 1.0, és a dir, els
 El codi font d'aquest projecte està disponible en el següent enllaç:
 [https://github.com/ntorrent/UniversityApp1.0](https://github.com/ntorrent/UniversityApp1.0)
 
-[![Deployment Status](https://...)](https://....)
+[Web desplegada](https://univoting.herokuapp.com/)
 
 Com executar l'aplicació
 ========================
@@ -29,6 +29,16 @@ Executar el servidor
 $ python manage.py runserver
 ```
 
+Modificacions respecte el model de dades entregat al *preassignment*
+====================================================================
+
+En aquesta entrega s’ha modificat lleugerament el model de dades presentat en el *preassignment*:
+
+En primer lloc, en comptes de dir que un grau pertany a una facultat es considera, de manera més genèrica, que un grau pertany a una universitat. Per tant, en comptes d’aparèixer la classe School apareix la classe University. D’aquesta classe University, se n’ha extret els atributs latitude i longitude, que representen la locatització de la universitat, i s’ha creat una classe específica Location, on a part d’aquests dos atributs latitude i longitude s’afegeixen atributs que representen l’adreça de manera textual. L’adreça textual s’introdueix al model, ja que serà la que es presentarà a l'usuari, en canvi la latitud i la longitud serviran sobretot per representar la localització en un mapa (el qual es preveu fer en la següent entrega, en la versió 2.0).
+
+En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia una complexitat innecessària en el model de dades, i se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
+
+
 Model de Dades
 ==============
 ![Data Model](/docs/UML.png)
@@ -49,14 +59,52 @@ Representades per l'entitat **Subject**.
 
 Les assignatures pertanyen a un curs de cada grau, el qual es representa en l'entitat **Course**. Els cursos poden estar només entre 1r i 5è (es considera que cap grau té més de 5 cursos).
 
-Modificacions respecte el model de dades entregat al *preassignment*
-====================================================================
 
-En aquesta entrega s’ha modificat lleugerament el model de dades presentat en el *preassignment*:
+Deployment a Heroku
+===================
 
-En primer lloc, en comptes de dir que un grau pertany a una facultat es considera, de manera més genèrica, que un grau pertany a una universitat. Per tant, en comptes d’aparèixer la classe School apareix la classe University. D’aquesta classe University, se n’ha extret els atributs latitude i longitude, que representen la locatització de la universitat, i s’ha creat una classe específica Location, on a part d’aquests dos atributs latitude i longitude s’afegeixen atributs que representen l’adreça de manera textual. L’adreça textual s’introdueix al model, ja que serà la que es presentarà a l'usuari, en canvi la latitud i la longitud serviran sobretot per representar la localització en un mapa (el qual es preveu fer en la següent entrega, en la versió 2.0).
+Per tal de fer el deploy a Heroku s'ha especificat en el fitxer [Procfile](./Procfile) el tipus de servidor que ha d'executar django.
 
-En segon lloc, s’ha eliminat la classe Teacher i les classes que depenien de Teacher (TeacherComment i TeacherQualification), ja que afegia una complexitat innecessària en el model de dades, i se segueix satisfent l’objectiu de l’aplicació i els requisits del projecte.
+A més a més s'ha emprat una aplicació externa, django_heroku que s'encarrega d'obtenir la informació descrita a heroku i als settings de l'aplicació per realitzar el deploy més facilment.
 
-Deployment
-================
+Per tal de poder tenir els entorns de producció i desenvolupament separats, s'ha fixat a heroku la variable d'entorn DJANGO_SETTINGS_MODULE per executar el fitxer [settings_heroku.py](./University/settings_heroku.py)
+
+Un cop realitzat el deploy a l'aplicació cal executar la comanda següent per generar una bbdd pseudoaleatoria d'xemple a partir de les dades en els fitxers .data i un superusuari amb nom **admin** i contrassenya **password** per tal de poder accedir al panell d'administració de l'aplicació.
+```bash
+$ heroku run bash tools/generate_db.sh
+```
+
+Deployment amb Docker
+=====================
+
+Per tal de fer un deploy amb Docker s'ha creat un fitxer [Dockerfile](./Dockerfile) i un fitxer [docker-compose-yml](./docker-compose.yml)
+
+La conjunció d'aquest dos fitxers crea un contenidor pel servidor de django i un altre contenidor pel servidor de la BBDD postgres.
+
+A més a més, en el contenidor de django s'ha fixat la variable DJANGO_MODULE_SETTINGS per a executar el fitxer de settings [settings_docker.py](./University/seetings_docker.py) i així tenir els entorns de producció i desenvolupament separats.
+
+Altres dades que ara mateix es troben en el fitxer de settings haurien de ser també incloses en variables d'entorn si es tractes d'una aplicació real.
+
+### Com fer el deploy amb docker
+
+Des del directori arrel del projecte (/UniversityApp1.0), creem els contenidors
+
+```bash
+$ docker compose up -d
+``` 
+
+Podem observar com s'han creat correctament i estan executant-se, per un costat tindrem el <nom contenidor web> i el <nom contenidor bbdd>
+
+```bash
+docker ps
+```
+
+Per tal de generar les dades de la bbdd, com en un entorn real no ho fariem directament a la construcció del docker, cal executar un script en bash que ens genereara la bbdd amb les dades de prova pseudoaleatories dels .data i genera un superusuari de nom **admin** amb contrasenya **password**:
+
+Aquest procès triga una estona, entre 30s i 1 min 30 s en els ordinadors on s'ha provat.
+
+```bash
+docker exec -d <nom contenidor web> bash tools/generate_db.sh
+```
+
+Un cop generada la bbdd, ja podem anar al localhost, port 8000 i ja ens trobarem a la pàgina web

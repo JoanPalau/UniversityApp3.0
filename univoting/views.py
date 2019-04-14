@@ -76,7 +76,7 @@ class SubjectDetailView(DetailView):
 
 def get_top_for_degrees(maximum, listed):
     worst_qualifies = sorted(listed.all(), key=lambda item: item.subject_id.review.mark)
-    best_qualifies= list(reversed(sorted(listed.all(), key=lambda item: item.subject_id.review.mark)))
+    best_qualifies = list(reversed(sorted(listed.all(), key=lambda item: item.subject_id.review.mark)))
     # Check for maximum qualified items
     if listed:
         length = len(listed)

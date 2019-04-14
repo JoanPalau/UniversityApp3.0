@@ -30,7 +30,7 @@ $ python3 manage.py migrate
 
 **En cas de voler executar l'aplicació amb dades de prova**
 
-2. La segúent comanda s'encarrega de borrar les dades actuals, generar-ne de noves, fer les migracions i crear un superusuari amb nom **admin** i contrasenya **password**
+2. La segúent comanda s'encarrega de borrar les dades actuals, generar-ne de noves, fer les migracions i crear un superusuari amb nom **admin** i contrasenya **password**. Aquest procés triga una estona, entre 30s i 1 min 30 s en els ordinadors on s'ha provat.
 ```bash
 $ bash tools/generate_db.sh
 ```
@@ -85,6 +85,8 @@ A més a més s'ha emprat una aplicació externa, django_heroku que s'encarrega 
 Per tal de poder tenir els entorns de producció i desenvolupament separats, s'ha fixat a heroku la variable d'entorn DJANGO_SETTINGS_MODULE per executar el fitxer [settings_heroku.py](./University/settings_heroku.py)
 
 Un cop realitzat el deploy a l'aplicació cal executar la comanda següent per generar una bbdd pseudoaleatòria d'exemple a partir de les dades en els fitxers .data i un superusuari amb nom **admin** i contrasenya **password** per tal de poder accedir al panell d'administració de l'aplicació.
+
+Aquest procés triga una estona, entre 30s i 1 min 30 s en els ordinadors on s'ha provat.
 ```bash
 $ heroku run bash tools/generate_db.sh
 ```
@@ -94,7 +96,7 @@ Deployment amb Docker (entorn producció)
 
 Per tal de fer un deploy amb Docker s'ha creat un fitxer [Dockerfile](./Dockerfile) i un fitxer [docker-compose-yml](./docker-compose.yml)
 
-La conjunció d'aquest dos fitxers crea un contenidor pel servidor de django i un altre contenidor pel servidor de la BBDD postgres.
+La conjunció d'aquests dos fitxers crea un contenidor pel servidor de django i un altre contenidor pel servidor de la BBDD postgres.
 
 A més a més, en el contenidor de django s'ha fixat la variable DJANGO_MODULE_SETTINGS per a executar el fitxer de settings [settings_docker.py](./University/seetings_docker.py) i així tenir els entorns de producció i desenvolupament separats.
 
@@ -127,4 +129,4 @@ Un cop generada la bbdd, ja podem anar al localhost, port 8000 i ja ens trobarem
 Proposta servidors
 ==================
 
-La proposta pel desplegament en varis servidors la pot trobar en [aquest document](./docs/proposta_deploy.md).
+La proposta pel desplegament en diversos servidors la pot trobar en [aquest document](./docs/proposta_deploy.md).

@@ -1,0 +1,15 @@
+{% extends "univoting/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!-- Header -->
+    <div class="jumbotron container-fluid">
+        <h3 class="heading mt-2 text-center"> Profile </h3>
+        <div class="heading-underline"></div>
+    </div>
+    <div class="container">
+        <div class="content-section">
+           <h2>{{user.username}}</h2>
+        </div>
+    </div>
+{%endblock content %}

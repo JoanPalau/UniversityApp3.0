@@ -1,0 +1,28 @@
+{% extends "univoting/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <!-- Header -->
+  <div class="jumbotron container-fluid">
+      <h3 class="heading mt-2 text-center"> Join Today </h3>
+      <div class="heading-underline"></div>
+  </div>
+
+  <div class="container col-md-4 col-md-offset-5">
+
+      <form method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Sign Up</button>
+          </div>
+      </form>
+      <div class="border-top pt-3 pb-5">
+          <small class="text-muted">
+              Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+          </small>
+      </div>
+  </div>
+
+{% endblock content %}

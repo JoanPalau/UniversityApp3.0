@@ -28,6 +28,7 @@ class University(models.Model):
     def get_absolute_url(self):
         return reverse('univoting:university-detail', kwargs={'pk': self.pk})
 
+    '''
     @staticmethod
     def create(name, telephone, location):
         if not isinstance(name, str) or re.match(r'^\s*$', name) or \
@@ -40,3 +41,4 @@ class University(models.Model):
         university.location = location
 
         return university
+    '''

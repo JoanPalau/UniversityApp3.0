@@ -46,7 +46,14 @@ def step_impl(context, university_name, username):
     assert context.browser.url == context.get_url(degree)
 
 
-@step("There are 1 degree")
+@step("There are {count:n} degree")
+def step_impl(context, count):
+    from univoting.models import Degree
+    assert count == Degree.objects.count()
+
+
+'''
+@when('I edit the current degree')
 def step_impl(context):
     context.browser.find_link_by_text('edit').click()
     # TODO: Test also using direct edit view link
@@ -55,3 +62,4 @@ def step_impl(context):
     for heading in context.table.headings:
         context.browser.fill(heading, context.table[0][heading])
     form.find_by_value('Submit').first.click()
+'''

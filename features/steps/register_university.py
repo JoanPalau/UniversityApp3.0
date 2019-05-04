@@ -57,17 +57,3 @@ def step_impl(context, name):
         for heading in context.table.headings:
             context.browser.fill(heading, context.table[0][heading])
         form.find_by_value('Submit').first.click()
-
-
-@step('Exists degree registered by "{username}" in "{university_name}"')
-def step_impl(context, username, university_name):
-    from django.contrib.auth.models import User
-    user = User.objects.get(username=username)
-    from univoting.models import University
-    university = University.objects.get(name=university_name)
-    from univoting.models import Degree
-    for row in context.table:
-        degree = Degree(university=university, user=user)
-        for heading in row.headings:
-            setattr(degree, heading, row[heading])
-        degree.save()

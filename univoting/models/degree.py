@@ -18,8 +18,8 @@ class Degree(models.Model):
     MAX_VALUE = 600
 
     title = models.CharField(validators=[validate_title], max_length=64)
-    ects = models.PositiveSmallIntegerField(validators=[MaxValueValidator(MAX_VALUE)])
-    description = models.TextField()
+    ects = models.PositiveSmallIntegerField(validators=[MaxValueValidator(MAX_VALUE)], default=240)
+    description = models.TextField(default='No description for now.')
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     def __str__(self):

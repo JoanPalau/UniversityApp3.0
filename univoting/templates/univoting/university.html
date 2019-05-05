@@ -18,7 +18,7 @@
 </style>
 {% endblock %}
 
-{% block title %} {{ univerisity.name }} {% endblock title %}
+{% block title %} {{ university.name }} {% endblock title %}
 
 {% block content %}
   <!-- Header -->
@@ -76,7 +76,11 @@
 
             <script>
 
-            	var mymap = L.map('map').setView([51.505, -0.09], 13);
+                var latitud = {{university.location.lat}};
+                var longitud = {{university.location.long}};
+
+                <!-- Creating and centering map to the university location -->
+                var mymap = L.map('map').setView([latitud, longitud], 13);
 
             	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             		maxZoom: 18,
@@ -86,10 +90,16 @@
             		id: 'mapbox.streets'
             	}).addTo(mymap);
 
-                L.marker([51.5, -0.09]).addTo(mymap);
+                <!-- Adding marker at the university location -->
+                L.marker([latitud, longitud]).addTo(mymap);
 
-                L.marker([51.5, -0.09]).addTo(mymap)
-            		.bindPopup("<b>Title!</b><br />More text.").openPopup();
+                var uniName = "{{ university.name }}";
+                var uniAddress = "{{ university.location.address }}";
+                var popUpText = "<b>"+uniName+"</b><br />"+uniAddress;
+
+                <!-- Adding the name and the address of the university in the marker-->
+                L.marker([latitud, longitud]).addTo(mymap)
+            		.bindPopup(popUpText).openPopup();
 
             </script>
 

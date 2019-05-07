@@ -22,7 +22,7 @@ Feature: Register University
     When I register a University
       | name              | description                   |
       | The University    | This is a brief description.  |
-    Then I'm viewing the details page for the University by "user"
+    Then I'm viewing the details page for University by "user"
       | name              | description                   |
       | The University    | This is a brief description.  |
     And There are 1 Universities
@@ -33,5 +33,5 @@ Feature: Register University
     When I register a University
       | name              | description                   |
       | The University    | This is a brief description.  |
-    Then I'n redirect to the login form
+    Then I'm redirected to the login form
     And There are 0 Universities

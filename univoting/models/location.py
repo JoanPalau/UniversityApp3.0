@@ -9,7 +9,7 @@ class Location(models.Model):
     city = models.CharField(max_length=32)
     country = models.CharField(max_length=32)
     lat = models.FloatField(verbose_name='Latitude', validators=[MaxValueValidator(90), MinValueValidator(-90)])
-    long = models.FloatField(verbose_name='Longitude', validators=[MaxValueValidator(-180), MinValueValidator(180)])
+    long = models.FloatField(verbose_name='Longitude', validators=[MaxValueValidator(180), MinValueValidator(-180)])
 
     def __str__(self):
         return "{} [{}] {}".format(self.address, self.city, self.country)

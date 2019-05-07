@@ -9,7 +9,9 @@ class Subject(models.Model):
     MIN_ECTS = 1
 
     name = models.CharField(max_length=64, default="New Subject")
-    ects = models.PositiveSmallIntegerField(validators=[MaxValueValidator(MAX_ECTS), MinValueValidator(MIN_ECTS)])
+    ects = models.PositiveSmallIntegerField(
+        validators=[MaxValueValidator(MAX_ECTS), MinValueValidator(MIN_ECTS)],
+        default=6)
     description = models.TextField(max_length=250, default="No description added yet")
     review = models.ForeignKey(SubjectReview, null=True, blank=True, on_delete=models.CASCADE)
 

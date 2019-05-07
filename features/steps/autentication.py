@@ -11,12 +11,16 @@ def step_impl(context, username, password):
 
 @given('I login as user "{username}" with password "{password}"')
 def step_impl(context, username, password):
+
+    """ AQUESTA URL DIU NEXT=/PROFILE/
+        PERO EN REALITAT LA REDIRECCIO ES CAP AL HOME
+        TANMATEIX, EL TEST PASSA CORRECTAMENT.
+    """
     context.browser.visit(context.get_url('/login/?next=/profile/'))
     form = context.browser.find_by_tag('form').first
     context.browser.fill('username', username)
     context.browser.fill('password', password)
     form.find_by_value('login').first.click()
-    # assert context.browser.is_text_present('Login')
     assert context.browser.is_text_present(username)
 
 
@@ -36,6 +40,6 @@ def step_impl(context, link_text):
     assert context.browser.is_element_present_by_xpath('//a[text()='+link_text+'"]"')
 
 
-@then("I'm redirected to the login form")
+@then('I\'m redirected to the login form')
 def step_impl(context):
     assert context.browser.url.startswith(context.get_url('login'))

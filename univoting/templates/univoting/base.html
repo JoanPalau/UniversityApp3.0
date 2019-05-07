@@ -11,6 +11,8 @@
 	  <link rel="stylesheet" type="text/css" href="{% static 'fixed.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- CONTINGUT EXTRA AL HEAD-->
+    {% block extra_meta_tags %}{% endblock %}
   </head>
 
     {% if title %}

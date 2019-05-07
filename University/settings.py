@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
     'univoting.apps.UnivotingConfig',
     'users.apps.UsersConfig',
+    'crispy_forms',
     'markdown_deux',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,5 +127,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
 
-# LOGIN_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'home'
+# LOGIN_REDIRECT_URL = 'profile'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -38,6 +38,18 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
     template_name = 'univoting/university-register.html'
 
 
+class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    form_class = UniversityForm
+    template_name = 'univoting/university-register.html'
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
+
+
+# Afegir modal a la template per confirmar el canvi
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
 
@@ -63,6 +75,32 @@ class UniversityDetailView(DetailView):
         return context
 
 
+class DegreeCreateView(LoginRequiredMixin, CreateView):
+    model = Degree
+    template_name = 'univoting/university-register.html'
+
+
+class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Degree
+    template_name = 'univoting/university-register.html'
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
+
+
+class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Degree
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
+
+
 class DegreeDetailView(DetailView):
     model = Degree
     context_object_name = 'degree'
@@ -86,6 +124,32 @@ class DegreeDetailView(DetailView):
             get_top_for_degrees(3, subjects_qualified)
 
         return context
+
+
+class SubjectCreateView(LoginRequiredMixin, CreateView):
+    model = Degree
+    template_name = 'univoting/university-register.html'
+
+
+class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Degree
+    template_name = 'univoting/university-register.html'
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
+
+
+class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Degree
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
 
 
 class SubjectDetailView(DetailView):

@@ -1,5 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 from univoting.forms import UniversityForm
 from univoting.models.degree import Degree
@@ -30,10 +31,20 @@ class UniversityListView(ListView):
         return context
 
 
-class UniversityCreateView(CreateView):
+class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ('name', 'description', 'telephone')
+    fields = ('name', 'description', 'telephone', 'location')
     template_name = 'univoting/university-register.html'
+
+
+class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = University
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.author:
+            return True
+        return False
 
 
 class UniversityDetailView(DetailView):

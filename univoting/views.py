@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+
+from univoting.forms import UniversityForm
 from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
@@ -26,6 +28,12 @@ class UniversityListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Universities'
         return context
+
+
+class UniversityCreateView(CreateView):
+    model = University
+    fields = ('name', 'description', 'telephone')
+    template_name = 'univoting/university-register.html'
 
 
 class UniversityDetailView(DetailView):

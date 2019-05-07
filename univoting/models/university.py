@@ -26,7 +26,7 @@ class University(models.Model):
         return "{} [{}]".format(self.name, self.telephone)
 
     def get_absolute_url(self):
-        return reverse('univoting:university-detail', kwargs={'pk': self.pk})
+        return reverse('university', kwargs={'pk': self.pk})
 
     '''
     @staticmethod

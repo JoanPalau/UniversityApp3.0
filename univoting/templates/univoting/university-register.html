@@ -1,0 +1,19 @@
+{% extends "univoting/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+  <div class="test-functionality">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        {{ form }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Registrar</button>
+      </div>
+    </form>
+  </div>
+
+
+{% endblock content %}

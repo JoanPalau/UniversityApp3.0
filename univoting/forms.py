@@ -19,6 +19,13 @@ class LocationForm(forms.ModelForm):
         fields = '__all__'
 
 
+"""
+class UniversityCreateForm(UniversityForm, LocationForm):
+    field_order = ['name', 'description', 'telephone', 'address',
+                   'zipcode', 'city', 'country']
+"""
+
+
 class DegreeForm(forms.ModelForm):
 
     class Meta:

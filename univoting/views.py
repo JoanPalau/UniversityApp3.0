@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
-from univoting.forms import UniversityForm
+from univoting.forms import UniversityForm  #, UniversityCreateForm
 from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
@@ -32,8 +32,9 @@ class UniversityListView(ListView):
 
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
-    model = University
-    fields = ('name', 'description', 'telephone', 'location')
+    # model = University
+    # fields = ('name', 'description', 'telephone', 'location')
+    form_class = UniversityForm
     template_name = 'univoting/university-register.html'
 
 

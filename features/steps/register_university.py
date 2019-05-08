@@ -8,11 +8,12 @@ use_step_matcher("parse")
 
 @given('Exists University registered by "{username}"')
 def step_impl(context, username):
-    from django.contrib.auth.models import User
-    user = User.objects.get(username=username)
+    # from django.contrib.auth.models import User
+    # user = User.objects.get(username=username)
     from univoting.models.university import University
     for row in context.table:
-        university = University(user=user)
+        # university = University(user=user)
+        university = University(name=username)
         for heading in row.headings:
             setattr(university, heading, row[heading])
         university.save()
@@ -21,8 +22,8 @@ def step_impl(context, username):
 @when('I register a University')
 def step_impl(context):
     for row in context.table:
-        context.browser.visit(context.get_url('university_create'))
-        if context.browser.url == context.get_url('university_create'):
+        context.browser.visit(context.get_url('new-university'))
+        if context.browser.url == context.get_url('new-university'):
             form = context.browser.find_by_tag('form').first
             for heading in row.headings:
                 context.browser.fill(heading, row[heading])

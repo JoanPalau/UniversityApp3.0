@@ -3,17 +3,27 @@
 
 {% block content %}
 
-  <div class="test-functionality">
-    <form method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        {{ form|crispy }}
-      </fieldset>
-      <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Registrar</button>
-      </div>
-    </form>
+  <div class="jumbotron container-fluid">
+    <h3 class="heading mt-2 text-center"> Degree </h3>
+    <div class="heading-underline"></div>
   </div>
+
+  <div class="container">
+    <div class="test-functionality">
+      <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
 
 
 {% endblock content %}

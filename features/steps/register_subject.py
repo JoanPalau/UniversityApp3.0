@@ -3,7 +3,7 @@ import operator
 from behave import *
 from django.db.models import Q
 
-use_step_matcher("parser")
+use_step_matcher("parse")
 
 
 @when('I register a subject at "{university_name}" in "{degree_title}"')

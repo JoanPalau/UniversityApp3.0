@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator
 from django.utils.translation import gettext_lazy
 from django.db import models
 from univoting.models.university import University
+from django.contrib.auth.models import User
 
 
 def validate_title(value):
@@ -21,6 +22,7 @@ class Degree(models.Model):
     ects = models.PositiveSmallIntegerField(validators=[MaxValueValidator(MAX_VALUE)], default=240)
     description = models.TextField(default='No description for now.')
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} [{}] {}".format(self.title, self.ects, self.description)

@@ -32,10 +32,14 @@ class UniversityListView(ListView):
 
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
-    # model = University
-    # fields = ('name', 'description', 'telephone', 'location')
-    form_class = UniversityForm
+    model = University
+    fields = ('name', 'description', 'telephone', )
     template_name = 'univoting/university-register.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        # afegir aqui el obtenir la localitzacio
+        return super().form_valid(form)
 
 
 class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

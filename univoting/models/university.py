@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
 from univoting.models.location import Location
 from django.contrib.auth.models import User
 
@@ -24,8 +25,17 @@ class University(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # Location
+
+    address = models.CharField(max_length=64)
+    zipcode = models.CharField(max_length=8)
+    city = models.CharField(max_length=32)
+    country = models.CharField(max_length=32)
+    lat = models.FloatField(verbose_name='Latitude', validators=[MaxValueValidator(90), MinValueValidator(-90)])
+    long = models.FloatField(verbose_name='Longitude', validators=[MaxValueValidator(180), MinValueValidator(-180)])
+
     def __str__(self):
-        return "{} [{}]".format(self.name, self.telephone)
+        return "{} [{}] City: {} Address: {}".format(self.name, self.telephone, self.city, self.address)
 
     def get_absolute_url(self):
         return reverse('university', kwargs={'pk': self.pk})

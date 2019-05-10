@@ -32,7 +32,7 @@ class UniversityListView(ListView):
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ['name', 'description']
+    fields = ['name', 'address', 'city', 'country', 'zipcode', 'lat', 'long', 'description', 'picture']
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):

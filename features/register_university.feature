@@ -23,8 +23,8 @@ Feature: Register University
       | name              | description                   |
       | The University    | This is a brief description.  |
     Then I'm viewing the details page for University by "user"
-      | name              | description                   |
-      | The University    | This is a brief description.  |
+      | name              |
+      | The University    |
     And There are 1 Universities
 
 

@@ -38,12 +38,17 @@ def step_impl(context, count):
 
 @then('I\'m viewing the details page for University by {username}')
 def step_impl(context, username):
+    '''
     q_list = [Q((attribute, context.table.rows[0][attribute]))
               for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('user', User.objects.get(username=username))))
+    q_list.append(Q(('created_by', User.objects.get(username=username))))
     from univoting.models.university import University
     university = University.objects.filter(reduce(operator.and_, q_list)).get()
+    assert context.browser.url == context.get_url(university)
+    '''
+    from univoting.models.university import University
+    university = University.objects.get(name=context.table.rows[0]['name'])
     assert context.browser.url == context.get_url(university)
 
 

@@ -21,4 +21,4 @@ class Subject(models.Model):
         return "Nom: {} ECTS: {}".format(self.name, self.ects)
 
     def get_absolute_url(self):
-        return reverse('univoting:subject_detail', kwargs={'pk': self.pk})
+        return reverse('univoting:subject', kwargs={'pk': self.pk})

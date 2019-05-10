@@ -14,7 +14,7 @@ def step_impl(context, username, university_name):
     university = University.objects.get(name=university_name)
     from univoting.models import Degree
     for row in context.table:
-        degree = Degree(university=university, user=user)
+        degree = Degree(university=university, created_by=user)
         for heading in row.headings:
             setattr(degree, heading, row[heading])
         degree.save()

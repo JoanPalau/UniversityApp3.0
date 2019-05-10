@@ -18,5 +18,10 @@ def step_impl(context):
 
 
 @Then('The list contains {count:n} degrees')
-def stem_impl(context, count):
+def step_impl(context, count):
     assert count == len(context.browser.find_by_css('div#degrees-group ul li a'))
+
+
+@Then('There is no "{button}" link available')
+def step_impl(context, button):
+    assert not context.browser.find_by_value(button)

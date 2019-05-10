@@ -20,7 +20,7 @@ def validate_phone_number(value):
 class University(models.Model):
 
     name = models.CharField(max_length=64)
-    description = models.TextField(default='No description for now.')
+    description = models.TextField()
     picture = models.CharField(max_length=32, default='noimage.png', blank=True, null=True)
     # telephone = models.CharField(max_length=12, blank=True)  # validators=[validate_phone_number],
     location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.CASCADE)

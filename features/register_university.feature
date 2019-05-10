@@ -6,15 +6,15 @@ Feature: Register University
   Background: There is a registered user
     Given Exists a user "user" with password "password"
 
-  Scenario: Register just University name
-    Given I login as user "user" with password "password"
-    When I register a University
-      | name              |
-      | The University  |
-    Then I'm viewing the details page for University by "user"
-      | name              |
-      | The University    |
-    And There are 1 Universities
+  #Scenario: Register just University name
+  #  Given I login as user "user" with password "password"
+  #  When I register a University
+  #    | name              |
+  #    | The University    |
+  #  Then I'm viewing the details page for University by "user"
+  #    | name              |
+  #    | The University    |
+  #  And There are 1 Universities
 
 
   Scenario: Register just University name and description
@@ -23,8 +23,8 @@ Feature: Register University
       | name              | description                   |
       | The University    | This is a brief description.  |
     Then I'm viewing the details page for University by "user"
-      | name              |
-      | The University    |
+      | name              | description                   |
+      | The University    | This is a brief description.  |
     And There are 1 Universities
 
 

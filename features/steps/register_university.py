@@ -50,6 +50,9 @@ def step_impl(context, username):
     from univoting.models.university import University
     university = University.objects.get(name=context.table.rows[0]['name'])
     assert context.browser.url == context.get_url(university)
+    if context.table.rows[0]['description']:
+        description = context.browser.find_by_tag('p')[0]
+        assert context.table.rows[0]['description'] == description.text
 
 
 @when('I edit the University with name "{name}"')

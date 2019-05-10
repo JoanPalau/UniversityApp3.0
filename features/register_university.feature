@@ -10,7 +10,7 @@ Feature: Register University
     Given I login as user "user" with password "password"
     When I register a University
       | name              |
-      | There University  |
+      | The University  |
     Then I'm viewing the details page for University by "user"
       | name              |
       | The University    |

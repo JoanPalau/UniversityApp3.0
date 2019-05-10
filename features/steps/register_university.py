@@ -59,8 +59,8 @@ def step_impl(context, username):
 def step_impl(context, name):
     from univoting.models import University
     university = University.objects.get(name=name)
-    context.browser.visit(context.get_url('university_edit', university.pk))
-    if context.browser.url == context.get_url('university_edit', university.pk) \
+    context.browser.visit(context.get_url(university.get_absolute_url() + 'update/'))
+    if context.browser.url == context.get_url(university.get_absolute_url() + 'update/') \
             and context.browser.find_by_tag('form'):
         form = context.browser.find_by_tag('form').first
         for heading in context.table.headings:

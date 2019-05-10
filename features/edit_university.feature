@@ -13,9 +13,9 @@ Feature: Edit University
 
   Scenario: Edit owned University registry description
     Given I login as user "user1" with password "password"
-    When edit the university with name "The University"
-      | description                   |
-      | This an other description.  |
+    When I edit the university with name "The University"
+      | name              | description                     |
+      | The University    | This is an other description.   |
   Then I'm viewing the details page for University by "user1"
       | name              | description                     |
       | The University    | This is an other description.   |

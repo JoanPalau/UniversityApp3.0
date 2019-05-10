@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator
 from django.utils.translation import gettext_lazy
 from django.db import models
+from django.urls import reverse
 from univoting.models.university import University
 from django.contrib.auth.models import User
 
@@ -26,6 +27,9 @@ class Degree(models.Model):
 
     def __str__(self):
         return "{} [{}] {}".format(self.title, self.ects, self.description)
+
+    def get_absolute_url(self):
+        return reverse('degree', kwargs={'pk': self.pk})
 
     @staticmethod
     def create(title, ects, description, university):

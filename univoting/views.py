@@ -32,7 +32,7 @@ class UniversityListView(ListView):
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ['name', 'description']
+    fields = ['name', 'address', 'city', 'country', 'zipcode', 'lat', 'long', 'description', 'picture']
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
@@ -99,7 +99,7 @@ class DegreeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
-        form.instance.university = get_object_or_404(University, self.kwargs['pk'])
+        form.instance.university = get_object_or_404(University, pk=self.kwargs['pk'])
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 

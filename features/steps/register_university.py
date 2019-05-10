@@ -11,9 +11,9 @@ def step_impl(context, username):
     from django.contrib.auth.models import User
     user = User.objects.get(username=username)
     from univoting.models.university import University
+
     for row in context.table:
-        university = University(user=user)
-        # university = University(name=username)
+        university = University(created_by=user)
         for heading in row.headings:
             setattr(university, heading, row[heading])
         university.save()

@@ -7,15 +7,15 @@ Feature: View University
     Given Exists a user "user1" with password "password"
     And Exists a user "user2" with password "password"
     And Exists University registered by "user1"
-      | name            | description         | telephone     |
-      | The First       | First description   | +34 973003588 |
+      | name            | description         |
+      | The First       | First description   |
     #And Exists degree at University "The First" by "user1"
     #  | name          |
     #  | Degree 1      |
     #  | Degree other  |
     And Exists University registered by "user2"
-      | name            | description         | telephone     |
-      | The Second      | Second description  | +34 973003589 |
+      | name            | description         |
+      | The Second      | Second description  |
 
   Scenario: View details for owned University with two degrees
     Given I login as user "user1" with password "password"

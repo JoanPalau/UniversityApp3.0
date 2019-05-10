@@ -1,8 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
-
-from univoting.forms import UniversityForm  #, UniversityCreateForm
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from univoting.forms import UniversityForm
 from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
@@ -33,7 +32,7 @@ class UniversityListView(ListView):
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ('name', 'description', 'telephone', )
+    fields = ['name', 'description', 'telephone']
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
@@ -41,12 +40,12 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
         # afegir aqui el obtenir la localitzacio
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'University Create View'
+    # def get_context_data(self, **kwargs):
+        # context = super().get_context_data(**kwargs)
+        # context['title'] = 'University Create View'
 
 
-class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = UniversityForm
     template_name = 'univoting/university-register.html'
 
@@ -55,11 +54,11 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == university.author:
             return True
         return False
-
+'''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'University Update View'
-
+'''
 
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
@@ -70,10 +69,11 @@ class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'University Delete View'
-
+'''
 
 class UniversityDetailView(DetailView):
     model = University
@@ -100,12 +100,13 @@ class DegreeCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degree Create View'
+'''
 
-
-class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Degree
     fields = ('title', 'ects', 'description')
     template_name = 'univoting/university-register.html'
@@ -116,10 +117,11 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return True
         return False
 
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degree Edit View'
-
+'''
 
 class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Degree
@@ -130,10 +132,11 @@ class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degree Delete View'
-
+'''
 
 class DegreeDetailView(DetailView):
     model = Degree
@@ -167,11 +170,10 @@ class SubjectCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
-
         return super().form_valid(form)
 
 
-class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Subject
     fields = ('name', 'ects', 'description')
     template_name = 'univoting/university-register.html'
@@ -191,6 +193,21 @@ class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == university.author:
             return True
         return False
+
+
+'''
+class SubjectReviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = SubjectReview
+
+    def form_valid(self, form):
+        # cridar update subject?
+
+
+
+def update_subject(new_values, old_values):
+    SubjectReview.recalculate_score_on_insert()
+    return NotImplementedError
+'''
 
 
 class SubjectDetailView(DetailView):

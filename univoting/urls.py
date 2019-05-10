@@ -12,13 +12,16 @@ urlpatterns = [
     path('universities/<int:pk>/', UniversityDetailView.as_view(), name='university'),
     path('degree/<int:pk>/', DegreeDetailView.as_view(), name='degree'),
     path('degree/<int:pkd>/subject/<int:pk>/', SubjectDetailView.as_view(), name='subject'),
+    # Editar universities
     path('universities/new/', UniversityCreateView.as_view(), name='new-university'),
     path('universities/<int:pk>/update/', UniversityEditView.as_view(), name='update-university'),
     path('universities/<int:pk>/delete/', UniversityDeleteView.as_view(), name='delete-university'),
-    path('degree/<int:pk>/new/', DegreeCreateView.as_view(), name='new-degree'),
+    # Editar degree
+    path('universities/<int:pk>/new/', DegreeCreateView.as_view(), name='new-degree'),
     path('degree/<int:pk>/update/', DegreeEditView.as_view(), name='update-degree'),
     path('degree/<int:pk>/delete/', DegreeDeleteView.as_view(), name='delete-degree'),
-    path('degree/<int:pkd>/subject/<int:pk>/new/', SubjectCreateView.as_view(), name='new-subject'),
+    # Editar subject
+    path('degree/<int:pk>/new/', SubjectCreateView.as_view(), name='new-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/update/', SubjectEditView.as_view(), name='update-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/delete/', SubjectDeleteView.as_view(), name='delete-subject'),
     # path('universities/', universities_mock, name='universities'),

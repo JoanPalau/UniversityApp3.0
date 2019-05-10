@@ -10,11 +10,11 @@ def step_impl(context):
 
 @then('I\'m viewing a list containing')
 def step_impl(context):
-    universities_links = context.browser.find_by_css('div#card-body h5')
+    universities_links = context.browser.find_by_css('h5')
     for i, row in enumerate(context.table):
         assert row['name'] == universities_links[i].text
 
 
 @step('The list contains {count:n} universities')
 def step_impl(context, count):
-    assert count == len(context.browser.find_by_css('div#card-body h5'))
+    assert count == len(context.browser.find_by_css('h5'))

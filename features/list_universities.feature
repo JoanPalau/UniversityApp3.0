@@ -12,7 +12,7 @@ Feature: List Universities
 
 
     Scenario: List the Universities
-      Given Exists University registered by "user"
+      Given Exists University registered by "The First"
         | name            | description         | telephone     |
         | The First       | First description   | +34 973003588 |
       When I list Universities
@@ -23,8 +23,9 @@ Feature: List Universities
 
 
     Scenario: List the Universities
-      Given Exists University registered by "user"
+      Given Exists University registered by "The First"
         | name            | description         | telephone     |
+        | The First       | First description   | +34 973003588 |
         | The Second      | Second description  | +34 973003589 |
         | The Third       | Third description   | +34 973003580 |
         | The Fourth      | Fourth description  | +34 973003581 |

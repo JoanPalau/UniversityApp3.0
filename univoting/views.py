@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from univoting.forms import UniversityForm
+# from univoting.forms import UniversityForm
 from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
@@ -32,7 +32,7 @@ class UniversityListView(ListView):
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ['name', 'description', 'telephone']
+    fields = ['name', 'description']
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
@@ -46,7 +46,8 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
 
 
 class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    form_class = UniversityForm
+    model = University
+    fields = ['name', 'description']
     template_name = 'univoting/university-register.html'
 
     def test_func(self):
@@ -59,6 +60,7 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'University Update View'
 '''
+
 
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
@@ -74,6 +76,7 @@ class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'University Delete View'
 '''
+
 
 class UniversityDetailView(DetailView):
     model = University
@@ -106,6 +109,7 @@ class DegreeCreateView(LoginRequiredMixin, CreateView):
         context['title'] = 'Degree Create View'
 '''
 
+
 class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Degree
     fields = ('title', 'ects', 'description')
@@ -123,6 +127,7 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context['title'] = 'Degree Edit View'
 '''
 
+
 class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Degree
 
@@ -137,6 +142,7 @@ class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Degree Delete View'
 '''
+
 
 class DegreeDetailView(DetailView):
     model = Degree

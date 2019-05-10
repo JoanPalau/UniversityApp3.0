@@ -53,7 +53,6 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-# Afegir modal a la template per confirmar el canvi
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
 

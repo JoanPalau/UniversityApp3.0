@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from .views import home, UniversityListView, UniversityDetailView, DegreeDetailView, SubjectDetailView, \
     UniversityCreateView, UniversityEditView, UniversityDeleteView, \
@@ -24,8 +26,13 @@ urlpatterns = [
     path('degree/<int:pk>/new/', SubjectCreateView.as_view(), name='new-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/update/', SubjectEditView.as_view(), name='update-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/delete/', SubjectDeleteView.as_view(), name='delete-subject'),
+    # Editar review
+    path('degree/<int:pkd>/subject/<int:pk>/new/', SubjectEditView.as_view(), name='update-review'),
     # path('universities/', universities_mock, name='universities'),
     # path('university/', university_mock, name='university'),
     # path('degree/', degree_mock, name='degree'),
     # path('subject/', subject_mock, name='subject'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

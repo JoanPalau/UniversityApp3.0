@@ -3,7 +3,6 @@
 
 
 {% block extra_meta_tags %}
-<!-- Afegit, repetit?-->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-2.2.3.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -46,33 +45,42 @@
                     },
                     success: function( data ) {
                         response( $.map( data.results, function( item ) {
-                            return {
-                                label: item.formatted,
-                                value: request.term,
+                            if (item.components.road) {
+                                return {
+                                    label: item.formatted,
+                                    value: request.term,
 
-                                universityName: item.components.university,
-                                footway: item.components.footway,
-                                city: item.components.city,
-                                town: item.components.town,
-                                countryName: item.components.country,
-                                zipCode: item.components.postcode,
-                                latitude: item.geometry.lat,
-                                longitude: item.geometry.lng
-                            }
+                                    universityName: item.components.university,
+
+                                    city: item.components.city,
+                                    town: item.components.town,
+                                    suburb: item.components.suburb,
+                                    hamlet: item.components.hamlet,
+
+                                    road: item.components.road,
+                                    countryName: item.components.country,
+                                    zipCode: item.components.postcode,
+                                    latitude: item.geometry.lat,
+                                    longitude: item.geometry.lng
+                                }
+                            } //end if
                         }));
                     }
-                });
+                }); //end ajax call
             },
-            minLength: 2,
+            minLength: 5,
             select: function( event, ui ) {
                 if (ui.item) {
-                    if (ui.item.footway) {
-                        $("#id_address").val(ui.item.footway);
-                    }
+                    $("#id_address").val(ui.item.road);
+
                     if (ui.item.city) {
                         $("#id_city").val(ui.item.city);
-                    } else {
+                    } else if (ui.item.town) {
                         $("#id_city").val(ui.item.town);
+                    } else if (ui.item.suburb) {
+                        $("#id_city").val(ui.item.suburb);
+                    } else {
+                        $("#id_city").val(ui.item.hamlet);
                     }                    
                     $("#id_country").val(ui.item.countryName);
                     $("#id_zipcode").val(ui.item.zipCode);

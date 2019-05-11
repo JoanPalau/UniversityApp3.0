@@ -49,7 +49,7 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.author:
+        if self.request.user == university.created_by:
             return True
         return False
 
@@ -59,7 +59,7 @@ class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.author:
+        if self.request.user == university.created_by:
             return True
         return False
 
@@ -97,7 +97,7 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.author:
+        if self.request.user == university.created_by:
             return True
         return False
 
@@ -107,7 +107,7 @@ class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.author:
+        if self.request.user == university.created_by:
             return True
         return False
 

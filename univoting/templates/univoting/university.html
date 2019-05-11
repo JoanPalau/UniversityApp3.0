@@ -48,7 +48,14 @@
 
       <div class="col-md-6">
         <div class="header-content-right">
+          <a href="{% url 'update-university' university.id %}">
+            <i class="fas fa-edit">Edit</i>
+          </a>
+          <a style="margin-left: 12em" href="{% url 'delete-university' university.id %}">
+            <i class="fas fa-eraser">Delete</i>
+          </a>
           <h3 class="mt-4">Welcome to our campus</h3>
+          <span></span>
           <p class="mt-4">
             {{ university.description }}
           </p>

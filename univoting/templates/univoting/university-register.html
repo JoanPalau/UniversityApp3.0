@@ -1,6 +1,15 @@
 {% extends "univoting/base.html" %}
 {% load crispy_forms_tags %}
 
+
+{% block extra_meta_tags %}
+<!-- Afegit, repetit?-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
+    
+
 {% block content %}
 
   <div class="jumbotron container-fluid">
@@ -19,7 +28,67 @@
           <button class="btn btn-outline-info" type="Submit" value="Submit">Registrar</button>
         </div>
       </form>
+
+      <script>
+      (function($) {
+        $(function() {
+
+	      // S'executa al comencar a escriure al camp "address"
+          $("#id_address").autocomplete({
+            
+            source: function( request, response ) {
+                $.ajax({
+                    url: "https://api.opencagedata.com/geocode/v1/json",
+                    dataType: "jsonp",
+                    data: {
+                        q: request.term,
+                        key: 'c11b43731d1144f9afe4967288c155f6'
+                    },
+                    success: function( data ) {
+                        response( $.map( data.results, function( item ) {
+                            return {
+                                label: item.formatted,
+                                value: item.formatted,
+
+                                universityName: item.components.university,
+                                city: item.components.city,
+                                town: item.components.town,
+                                countryName: item.components.country,
+                                zipCode: item.components.postcode,
+                                latitude: item.geometry.lat,
+                                longitude: item.geometry.lng
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                if (ui.item) {
+                    if (ui.item.universityName) {
+                        $("#id_name").val(ui.item.universityName);
+                    }
+                    if (ui.item.city) {
+                        $("#id_city").val(ui.item.city);
+                    } else {
+                        $("#id_city").val(ui.item.town);
+                    }                    
+                    $("#id_country").val(ui.item.countryName);
+                    $("#id_zipcode").val(ui.item.zipCode);
+                    $("#id_lat").val(ui.item.latitude);
+                    $("#id_long").val(ui.item.longitude);
+                }
+            }            
+
+          });
+
+        });
+      })(jQuery);
+      </script>
+
     </div>
   </div>
+
+
 
 {% endblock content %}

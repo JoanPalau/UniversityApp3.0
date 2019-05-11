@@ -34,7 +34,7 @@
         $(function() {
 
 	      // S'executa al comencar a escriure al camp "address"
-          $("#id_address").autocomplete({
+          $("#id_name").autocomplete({
             
             source: function( request, response ) {
                 $.ajax({
@@ -48,9 +48,10 @@
                         response( $.map( data.results, function( item ) {
                             return {
                                 label: item.formatted,
-                                value: item.formatted,
+                                value: request.term,
 
                                 universityName: item.components.university,
+                                footway: item.components.footway,
                                 city: item.components.city,
                                 town: item.components.town,
                                 countryName: item.components.country,
@@ -65,8 +66,8 @@
             minLength: 2,
             select: function( event, ui ) {
                 if (ui.item) {
-                    if (ui.item.universityName) {
-                        $("#id_name").val(ui.item.universityName);
+                    if (ui.item.footway) {
+                        $("#id_address").val(ui.item.footway);
                     }
                     if (ui.item.city) {
                         $("#id_city").val(ui.item.city);

@@ -65,13 +65,22 @@
 
     <div class="row mb-4">
       <div id="degrees-group" class="col-md-6">
-        <lu class="list-group">
+        <div class="header-degrees">
+          {% if user.is_authenticated %}
+            <a href="{% url 'new-degree' university.id %}">
+              <i class="fas fa-pen" style="font-size: 1.5em"> Degrees</i>
+            </a>
+          {% else %}
+            <h3>Degrees</h3>
+          {% endif %}
+        </div>
+        <ul style="margin-top: 1em" class="list-group">
           {% for degree in degrees %}
             <li class="list-group-item">
               <a class="ml-4" href="{% url 'degree' degree.pk %}"> {{ degree.title }} </a>
             </li>
           {% endfor %}
-        </lu>
+        </ul>
       </div>
       <div class="col-md-6 my-2">
           <div id="map"></div>

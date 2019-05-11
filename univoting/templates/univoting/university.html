@@ -1,6 +1,5 @@
 {% extends "univoting/base.html" %}
 {% load static from staticfiles %}
-
 {% block extra_meta_tags %}
 <link
     rel="stylesheet"
@@ -41,9 +40,9 @@
     <div class="row">
       <div class="col-md-6">
         <div class="header-content-left">
-          {% with ''|add:university.picture as image_static %}
-            <img src="{% static image_static %}" alt="{{ university.name }} campus" style="width: 100%;">
-          {% endwith %}
+          <div class="media">
+            <img src="{{ university.picture.url }}" alt="{{ university.name }} campus" style="width: 100%;">
+          </div>
         </div>
       </div>
 

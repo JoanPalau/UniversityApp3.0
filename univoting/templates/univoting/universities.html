@@ -28,9 +28,7 @@
       <div class="col-md-8">
         <div class="card mb-3">
 
-          {% with ''|add:uni.picture as image_static %}
-            <img class="card-img-top" src="{% static image_static %}" alt="{{ uni.name }} campus">
-          {% endwith %}
+            <img class="card-img-top" src="{{ uni.picture.url }}" alt="{{ uni.name }} campus">
 
           <div class="card-body">
 

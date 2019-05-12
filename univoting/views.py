@@ -8,6 +8,7 @@ from univoting.models.course import Course
 from univoting.models.degree import University
 from univoting.models.subject_review import SubjectReview
 from univoting.models.subject_comment import SubjectComment
+from univoting.forms import SubjectCreateForm
 
 
 def home(request):
@@ -40,10 +41,6 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
         # afegir aqui el obtenir la localitzacio
         return super().form_valid(form)
 
-    # def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
-        # context['title'] = 'University Create View'
-
 
 class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = University
@@ -55,11 +52,6 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == university.created_by:
             return True
         return False
-'''
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'University Update View'
-'''
 
 
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -70,12 +62,6 @@ class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == university.created_by:
             return True
         return False
-
-    '''
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'University Delete View'
-'''
 
 
 class UniversityDetailView(DetailView):
@@ -103,12 +89,6 @@ class DegreeCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-    '''
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Degree Create View'
-'''
-
 
 class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Degree
@@ -121,12 +101,6 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
-    '''
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Degree Edit View'
-'''
-
 
 class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Degree
@@ -136,12 +110,6 @@ class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == university.created_by:
             return True
         return False
-
-    '''
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Degree Delete View'
-'''
 
 
 class DegreeDetailView(DetailView):
@@ -170,12 +138,14 @@ class DegreeDetailView(DetailView):
 
 
 class SubjectCreateView(LoginRequiredMixin, CreateView):
+    # form_class = SubjectCreateForm
     model = Subject
-    fields = ('name', 'ects', 'description')
+    fields = ('name', 'ects', 'description', '_course', '_degree')
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        form.instance._degree = self.kwargs['pk']
         return super().form_valid(form)
 
 
@@ -201,19 +171,24 @@ class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-'''
 class SubjectReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = SubjectReview
+    fields = ('mark', 'difficulty', 'work_volume')
+    template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
-        # cridar update subject?
+        values = {'pk': self.kwargs['pk'],
+                  'mark': form.instance.mark,
+                  'difficulty': form.instance.difficulty,
+                  'work_volume': form.instance.work_volume,
+                  }
+        update_subject(values)
+        return super().form_valid(form)
 
 
-
-def update_subject(new_values, old_values):
-    SubjectReview.recalculate_score_on_insert()
-    return NotImplementedError
-'''
+def update_subject(values):
+    subject = get_object_or_404(Subject, pk=values['pk'])
+    subject.review.recalculate_score_on_insert(values['mark'], values['difficulty'], values['work_volume'])
 
 
 class SubjectDetailView(DetailView):

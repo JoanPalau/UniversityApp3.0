@@ -6,6 +6,7 @@ from django.db import models
 from django.urls import reverse
 from univoting.models.university import University
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 def validate_title(value):
@@ -45,3 +46,6 @@ class Degree(models.Model):
         degree.university = university
 
         return degree
+
+    def get_absolute_url(self):
+        return reverse('degree', kwargs={'pk': self.pk})

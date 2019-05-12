@@ -17,8 +17,18 @@ class Subject(models.Model):
     review = models.ForeignKey(SubjectReview, null=True, blank=True, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    _course = models.PositiveSmallIntegerField(null=True, blank=True)
+    _degree = models.PositiveIntegerField(null=True, blank=True)
+
     def __str__(self):
         return "Nom: {} ECTS: {}".format(self.name, self.ects)
 
     def get_absolute_url(self):
         return reverse('univoting:subject', kwargs={'pk': self.pk})
+        # return reverse('subject_detail', kwargs={'pk': self.pk})
+
+    def get_course(self):
+        return self._course
+
+    def get_degree(self):
+        return self._degree

@@ -24,7 +24,13 @@
     </div>
 
     <div class="col-md-5 mr-4">
-      <h3 class="heading mt-2 text-center">Curses</h3>
+
+      <a href="{% url 'new-subject' degree.id %}">
+        <h3 class="heading mt-2 text-center">
+          <span><i class="fas fa-pen"></i> Curses</span>
+        </h3>
+      </a>
+
       <div id="accordion" class="container">
         {% if subjects %}
           {% regroup subjects|dictsort:"course" by course as course_list %}

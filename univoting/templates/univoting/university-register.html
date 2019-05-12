@@ -1,6 +1,14 @@
 {% extends "univoting/base.html" %}
 {% load crispy_forms_tags %}
 
+
+{% block extra_meta_tags %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
+    
+
 {% block content %}
 
   <div class="jumbotron container-fluid">
@@ -19,7 +27,77 @@
           <button class="btn btn-outline-info" type="Submit" value="Submit">Registrar</button>
         </div>
       </form>
+
+      <script>
+      (function($) {
+        $(function() {
+
+	      // S'executa al comencar a escriure al camp "address"
+          $("#id_name").autocomplete({
+            
+            source: function( request, response ) {
+                $.ajax({
+                    url: "https://api.opencagedata.com/geocode/v1/json",
+                    dataType: "jsonp",
+                    data: {
+                        q: request.term,
+                        key: 'c11b43731d1144f9afe4967288c155f6'
+                    },
+                    success: function( data ) {
+                        response( $.map( data.results, function( item ) {
+                            if (item.components.road) {
+                                return {
+                                    label: item.formatted,
+                                    value: request.term,
+
+                                    universityName: item.components.university,
+
+                                    city: item.components.city,
+                                    town: item.components.town,
+                                    suburb: item.components.suburb,
+                                    hamlet: item.components.hamlet,
+
+                                    road: item.components.road,
+                                    countryName: item.components.country,
+                                    zipCode: item.components.postcode,
+                                    latitude: item.geometry.lat,
+                                    longitude: item.geometry.lng
+                                }
+                            } //end if
+                        }));
+                    }
+                }); //end ajax call
+            },
+            minLength: 5,
+            select: function( event, ui ) {
+                if (ui.item) {
+                    $("#id_address").val(ui.item.road);
+
+                    if (ui.item.city) {
+                        $("#id_city").val(ui.item.city);
+                    } else if (ui.item.town) {
+                        $("#id_city").val(ui.item.town);
+                    } else if (ui.item.suburb) {
+                        $("#id_city").val(ui.item.suburb);
+                    } else {
+                        $("#id_city").val(ui.item.hamlet);
+                    }                    
+                    $("#id_country").val(ui.item.countryName);
+                    $("#id_zipcode").val(ui.item.zipCode);
+                    $("#id_lat").val(ui.item.latitude);
+                    $("#id_long").val(ui.item.longitude);
+                }
+            }            
+
+          });
+
+        });
+      })(jQuery);
+      </script>
+
     </div>
   </div>
+
+
 
 {% endblock content %}

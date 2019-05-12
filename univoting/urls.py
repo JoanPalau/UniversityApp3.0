@@ -24,6 +24,8 @@ urlpatterns = [
     path('degree/<int:pk>/new/', SubjectCreateView.as_view(), name='new-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/update/', SubjectEditView.as_view(), name='update-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/delete/', SubjectDeleteView.as_view(), name='delete-subject'),
+    # Editar review
+    path('degree/<int:pkd>/subject/<int:pk>/new/', SubjectEditView.as_view(), name='update-review'),
     # path('universities/', universities_mock, name='universities'),
     # path('university/', university_mock, name='university'),
     # path('degree/', degree_mock, name='degree'),

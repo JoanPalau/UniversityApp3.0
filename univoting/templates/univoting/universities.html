@@ -9,39 +9,44 @@
   </div>
 
 
-  <div class="row padding justify-content-center">
-    <nav aria-label="breadcrumb" class="col-md-8">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-      </ol>
-    </nav>
-  </div>
+  <div class="container">
 
-  <div class="row">
-    <a class="button" href="{% url 'new-university' %}">Nova universitat</a>
-  </div>
-
-  <!-- Cards -->
-  {% for uni in universities %}
     <div class="row padding justify-content-center">
-      <div class="col-md-8">
-        <div class="card mb-3">
+      <nav aria-label="breadcrumb" class="col-md-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+        </ol>
+      </nav>
+    </div>
 
-          {% with ''|add:uni.picture as image_static %}
-            <img class="card-img-top" src="{% static image_static %}" alt="{{ uni.name }} campus">
-          {% endwith %}
+    <!-- Cards -->
+      <div class="row">
+        <div class="col-md-10">
+          {% for uni in universities %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card mb-3">
 
-          <div class="card-body">
+                    <img class="card-img-top" src="{{ uni.picture.url }}" alt="{{ uni.name }} campus">
 
-            <h5 id="{{ uni.name }}" class="card-title">{{ uni.name }}</h5>
-            <p class="card-text">{{ uni.description }}
+                    <div class="card-body">
+                      <h5 id="{{ uni.name }}" class="card-title">{{ uni.name }}</h5>
+                      <p class="card-text">{{ uni.description }}
+                    </div>
 
-          </div>
-          <a href="{% url 'university' uni.pk %}" class="btn btn-outline-primary visitButton ml-4 mb-4">Visit</a>
+                    <a href="{% url 'university' uni.pk %}" class="btn btn-outline-primary visitButton ml-4 mb-4">Visit</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-2">
+          <p style="text-align:center">Cannot find your University?</p>
+          <a class="btn btn-primary btn-lg" href="{% url 'new-university' %}">Add University</a>
         </div>
       </div>
-    </div>
-  {% endfor %}
+  </div>
+
 
 {% endblock content %}

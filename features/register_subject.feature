@@ -15,9 +15,9 @@ Feature: Register Subject
   Scenario: Register just subject name
     Given I login as user "user" with password "password"
     When I register a subject at "The University" in "The Degree"
-      | name          |
-      | First subject |
+      | name          | _course  |
+      | First subject | 1       |
     Then I'm viewing the details page for the subject at University "The University" in "The Degree" by "user"
-      | name          |
-      | First subject |
+      | name          | _course  |
+      | First subject | 1       |
     And There are 1 subject

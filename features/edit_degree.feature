@@ -23,3 +23,13 @@ Feature: Edit Degree
       | title       | description                 |
       | New Degree  | This is a new description.  |
     And There are 1 degree
+    
+  Scenario: Try to edit degree but not logged in
+    Given I'm not logged in
+    When I view the details for degree "First degree"
+    Then There is no "Edit" link available
+    
+  Scenario: Try to edit degree but not the owner
+    Given I login as user "user1" with password "password"
+    When I view the details for degree "First degree"
+    Then There is no "Edit" link available

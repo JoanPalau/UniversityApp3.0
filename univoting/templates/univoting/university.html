@@ -49,7 +49,7 @@
       <div class="col-md-6">
 
         <div id="description" class="header-content-right">
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user == university.created_by %}
             <a id="edit" href="{% url 'update-university' university.id %}">
               <i class="fas fa-edit"></i>Edit
             </a>

@@ -12,9 +12,9 @@ Feature: List Universities
 
 
     Scenario: List the Universities
-      Given Exists University registered by "The First"
-        | name            | description         | telephone     |
-        | The First       | First description   | +34 973003588 |
+      Given Exists University registered by "user"
+        | name            | description         |
+        | The First       | First description   |
       When I list Universities
       Then I'm viewing a list containing
         | name            |
@@ -23,13 +23,13 @@ Feature: List Universities
 
 
     Scenario: List the Universities
-      Given Exists University registered by "The First"
-        | name            | description         | telephone     |
-        | The First       | First description   | +34 973003588 |
-        | The Second      | Second description  | +34 973003589 |
-        | The Third       | Third description   | +34 973003580 |
-        | The Fourth      | Fourth description  | +34 973003581 |
-        | The Fifth       | Fifth description   | +34 973003582 |
+      Given Exists University registered by "user"
+        | name            | description         |
+        | The First       | First description   |
+        | The Second      | Second description  |
+        | The Third       | Third description   |
+        | The Fourth      | Fourth description  |
+        | The Fifth       | Fifth description   |
       When I list Universities
       Then I'm viewing a list containing
         | name            |

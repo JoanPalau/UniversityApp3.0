@@ -12,9 +12,9 @@ Feature: Register Degree
   Scenario: Register just degree title
     Given I login as user "user" with password "password"
     When I register a degree at University "The University"
-      | name          |
-      | First degree  |
+      | title          |
+      | First degree   |
     Then I'm viewing the details page for degree at University "The University" by "user"
-      | name          |
-      | First degree  |
+      | title          |
+      | First degree   |
     And There are 1 degree

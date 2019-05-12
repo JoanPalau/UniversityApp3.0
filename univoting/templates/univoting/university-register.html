@@ -12,7 +12,11 @@
 {% block content %}
 
   <div class="jumbotron container-fluid">
-    <h3 class="heading mt-2 text-center"> Degree </h3>
+    {% if "/universities/" in request.path %}
+      <h3 class="heading mt-2 text-center"> University </h3>
+    {% elif "/degree/" in request.path %}
+      <h3 class="heading mt-2 text-center"> Degree </h3>
+    {% endif %}
     <div class="heading-underline"></div>
   </div>
 

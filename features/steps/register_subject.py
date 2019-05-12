@@ -23,8 +23,9 @@ def step_impl(context, university_name, degree_title):
 
 @then('I\'m viewing the details page for the subject '
       'at University "{university_name}" '
-      'in "{degree_title}" by "user_name"')
+      'in "{degree_title}" by "{user_name}"')
 def step_impl(context, university_name, degree_title, user_name):
+    '''
     q_list = [Q((attribute, context.table.row[0][attribute]))
               for attribute in context.table.headings]
     from django.contrib.auth.models import User
@@ -35,7 +36,16 @@ def step_impl(context, university_name, degree_title, user_name):
     q_list.append(Q(('degree', Degree.objects.get(title=degree_title, university=university))))
     from univoting.models import Subject
     subject = Subject.objects.filter(reduce(operator.and_, q_list)).get()
-    assert context.browser.url == context.get_url(subject)
+    '''
+    '''
+        THIS DOESN'T WORK BECAUSE THE IMPLEMENTATION
+        ############################################
+    '''
+    from univoting.models.subject import Subject
+    subject = Subject.objects.get(name=context.table.rows[0]['title']).get()
+    from univoting.models.course import Course
+    course = Course.objects.get(subject_id=subject)
+    assert context.browser.url == context.get_url(course.degree_id + 'subject/' + subject.pk)
 
 
 @step("There are {count:n} subject")

@@ -32,6 +32,15 @@
 
 
     <div class="col-md-6 mr-5">
+      {% if user.is_authenticated and user == subject.created_by %}
+        <a id="edit" href="{% url 'update-subject' course.degree_id.pk subject.id %}">
+          <i class="fas fa-edit"></i>Edit
+        </a>
+        <a id="delete" style="margin-left: 12em" href="{% url 'delete-subject' course.degree_id.pk subject.id %}">
+          <i class="fas fa-eraser"></i>Delete
+        </a>
+      {% endif %}
+
       <h3 class="heading mt-2 text-center">{{ subject.name }}</h3>
 
       <div class="subject-box" id="textbox">

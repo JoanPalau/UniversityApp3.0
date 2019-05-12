@@ -1,0 +1,22 @@
+{% extends "univoting/base.html" %}
+{% block content %}
+
+  <div class="jumbotron container-fluid">
+    <h3 class="heading mt-2 text-center"> Degree </h3>
+    <div class="heading-underline"></div>
+  </div>
+
+  <div class="content-section">
+      <form method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Delete object.title </legend>
+              <h2>Are you sure you want to delete the degree "{{ object.title }}"</h2>
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+              <a class="btn btn-outline-secondary" href="{% url 'degree' object.id %}">Cancel</a>
+          </div>
+      </form>
+  </div>
+{% endblock content %}

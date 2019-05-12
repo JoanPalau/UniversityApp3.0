@@ -33,7 +33,7 @@ class UniversityListView(ListView):
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
-    fields = ['name', 'address', 'city', 'country', 'zipcode', 'lat', 'long', 'description', 'picture']
+    fields = ['name', 'description', 'address', 'city', 'country', 'zipcode', 'lat', 'long', 'picture']
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):
@@ -123,24 +123,27 @@ class DegreeDetailView(DetailView):
 
         # Obtain list of subjects with their course for the Degree
         subjects = Course.objects.filter(degree_id=context['degree'])
+
         context['subjects'] = subjects
 
         # Obtain list of best and worst subjects
-        subjects_qualified = []
-        for subject in subjects.all():
-            if subject.subject_id.review:
-                subjects_qualified.append(subject)
+        if subjects:
+            subjects_qualified = []
+            for subject in subjects.all():
+                if subject.subject_id.review:
+                    subjects_qualified.append(subject)
 
-        context['worst_subjects'], context['best_subjects'] = \
-            get_top_for_degrees(3, subjects_qualified)
-
+            context['worst_subjects'], context['best_subjects'] = \
+                get_top_for_degrees(3, subjects_qualified)
+        else:
+            context['worst_subjects'], context['best_subjects'] = (), ()
         return context
 
 
 class SubjectCreateView(LoginRequiredMixin, CreateView):
     # form_class = SubjectCreateForm
     model = Subject
-    fields = ('name', 'ects', 'description', '_course', '_degree')
+    fields = ('name', 'ects', 'description', '_course')
     template_name = 'univoting/university-register.html'
 
     def form_valid(self, form):

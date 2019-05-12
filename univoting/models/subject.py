@@ -15,6 +15,7 @@ class Subject(models.Model):
         default=6)
     description = models.TextField(max_length=250, default="No description added yet")
     review = models.ForeignKey(SubjectReview, null=True, blank=True, on_delete=models.CASCADE)
+    # review = SubjectReview()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     _course = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -24,7 +25,7 @@ class Subject(models.Model):
         return "Nom: {} ECTS: {}".format(self.name, self.ects)
 
     def get_absolute_url(self):
-        return reverse('subject_detail', kwargs={'pk': self.pk})
+        return reverse('subject', kwargs={'pk': self.pk, 'pkd': self._degree})
 
     def get_course(self):
         return self._course

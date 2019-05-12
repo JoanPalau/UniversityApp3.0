@@ -23,7 +23,7 @@ class SubjectReview(models.Model):
     workVolume = models.PositiveSmallIntegerField(choices=WORK_LIST,
                                                   validators=[MaxValueValidator(MAX_WORK),
                                                               MinValueValidator(MIN_WORK)], default=MIN_WORK)
-    amount = models.PositiveIntegerField()
+    amount = models.PositiveIntegerField(default=0)
     # comments = models.
 
     def __str__(self):
@@ -38,9 +38,11 @@ class SubjectReview(models.Model):
     def get_difficulty_rpr(self):
         return '{:.2f}'.format(self.difficulty)
 
+    '''
     def get_absolute_url(self):
-        return reverse('univoting:subject_detail', kwargs={'pk': self.pk})
-
+        
+        return reverse('subject', kwargs={'pk': self.pk})
+    '''
     def increase_amount(self):
         self.amount += 1
 
@@ -57,3 +59,8 @@ class SubjectReview(models.Model):
         self.work_score = self.work_score + ((work_volume - self.work_score) / self.amount)
         # recalculate work volume
         self.set_work_volume()
+
+    def first_score(self):
+        self.mark = 0
+        self.difficulty = 0
+        self.work_score = 0

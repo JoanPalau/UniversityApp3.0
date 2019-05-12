@@ -15,4 +15,21 @@ Feature: Edit Degree
 
   Scenario: Edit owned degree
     Given I login as user "user1" with password "password"
-    # When I'm viewing the details page for degree at University "The University" by "User1"
+    When I view the details for degree "First degree"
+    And I edit the current degree
+      | title       | description                 |
+      | New Degree  | This is a new description.  |
+    Then I'm viewing the details page for degree at University "The University" by "user1"
+      | title       | description                 |
+      | New Degree  | This is a new description.  |
+    And There are 1 degree
+    
+  Scenario: Try to edit degree but not logged in
+    Given I'm not logged in
+    When I view the details for degree "First degree"
+    Then There is no "Edit" link available
+    
+  Scenario: Try to edit degree but not the owner
+    Given I login as user "user1" with password "password"
+    When I view the details for degree "First degree"
+    Then There is no "Edit" link available

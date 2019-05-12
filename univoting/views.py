@@ -56,6 +56,7 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
+    template_name = 'univoting/confirm_university_delete.html'
 
     def test_func(self):
         university = self.get_object()
@@ -104,6 +105,7 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Degree
+    template_name = 'univoting/confirm_degree_delete.html'
 
     def test_func(self):
         university = self.get_object()
@@ -141,7 +143,6 @@ class DegreeDetailView(DetailView):
 
 
 class SubjectCreateView(LoginRequiredMixin, CreateView):
-    # form_class = SubjectCreateForm
     model = Subject
     fields = ('name', 'ects', 'description', '_course')
     template_name = 'univoting/university-register.html'
@@ -166,6 +167,7 @@ class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Subject
+    template_name = 'univoting/confirm_subject_delete.html'
 
     def test_func(self):
         university = self.get_object()

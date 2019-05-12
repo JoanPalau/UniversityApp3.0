@@ -64,21 +64,26 @@
         {% else %}
           {% for comment in comments %}
             <div class="card border-success mb-3">
-              <div class="card-header bg-transparent border-success">{{ comment.author }}</div>
+
+              <div class="card-header bg-transparent border-success">
+                {{ comment.author }}
+                {% if user.is_authenticated and user == comment.author %}
+                  <a id="edit" style="margin-left: 5rem" href="{% url 'update-comment' comment.id %}">
+                    <i class="fas fa-edit">Edit</i>
+                  </a>
+                  <a id="delete" style="margin-left: 5rem" href="{% url 'delete-comment' comment.id %}">
+                    <i class="fas fa-eraser">Delete</i>
+                  </a>
+                {% endif %}
+
+              </div>
+
               <div class="card-body text-success">
                 <p class="card-text">
                   {{ comment.comment }}
                 </p>
               </div>
               <div class="card-footer bg-transparent border-success">{{ comment.date }}</div>
-              {% if user.is_authenticated and user == comment.author %}
-                <a id="edit" href="{% url 'update-comment' comment.id %}">
-                  <i class="fas fa-edit"></i>Edit
-                </a>
-                <a id="delete" style="margin-left: 12em" href="{% url 'delete-comment' comment.id %}">
-                  <i class="fas fa-eraser"></i>Delete
-                </a>
-              {% endif %}
             </div>
           {% endfor %}
         {% endif %}

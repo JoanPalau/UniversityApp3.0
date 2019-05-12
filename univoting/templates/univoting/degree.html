@@ -80,7 +80,7 @@
     </div>
 
     <div class="col-md-5 ml-4">
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and user == degree.created_by %}
         <a id="edit" href="{% url 'update-degree' degree.id %}">
           <i class="fas fa-edit"></i>Edit
         </a>

@@ -54,6 +54,7 @@
     <div class="col-md-4 ml-5">
       <div class="header-content-right">
         <h3 class="heading mt-2 text-center">Comments</h3>
+        <a href="{% url 'add-comment' subject.id %}"><h6>Add comment</h6></a>
       </div>
       <div class="scroll-panel">
         {% if not comments %}

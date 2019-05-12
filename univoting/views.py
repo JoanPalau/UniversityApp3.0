@@ -9,6 +9,7 @@ from univoting.models.degree import University
 from univoting.models.subject_review import SubjectReview
 from univoting.models.subject_comment import SubjectComment
 from univoting.forms import SubjectCreateForm
+from django.urls import reverse_lazy
 
 
 def home(request):
@@ -57,6 +58,7 @@ class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = University
     template_name = 'univoting/confirm_university_delete.html'
+    success_url = reverse_lazy('home')
 
     def test_func(self):
         university = self.get_object()
@@ -106,6 +108,7 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Degree
     template_name = 'univoting/confirm_degree_delete.html'
+    success_url = reverse_lazy('home')
 
     def test_func(self):
         university = self.get_object()
@@ -168,6 +171,7 @@ class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Subject
     template_name = 'univoting/confirm_subject_delete.html'
+    success_url = reverse_lazy('home')
 
     def test_func(self):
         university = self.get_object()
@@ -207,6 +211,17 @@ class SubjectDetailView(DetailView):
         context['comments'] = SubjectComment.objects.filter(subject=context['subject'])
         context['course'] = get_object_or_404(Course, subject_id=context['subject'])
         return context
+
+
+class SubjectCommentCreate(LoginRequiredMixin, CreateView):
+    model = SubjectComment
+    fields = ('comment', )
+    template_name = 'univoting/create_edit_template.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.subject = Subject.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
 
 
 def get_top_for_degrees(maximum, listed):

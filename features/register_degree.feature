@@ -13,8 +13,8 @@ Feature: Register Degree
     Given I login as user "user" with password "password"
     When I register a degree at University "The University"
       | title          |
-      | First degree  |
+      | First degree   |
     Then I'm viewing the details page for degree at University "The University" by "user"
       | title          |
-      | First degree  |
+      | First degree   |
     And There are 1 degree

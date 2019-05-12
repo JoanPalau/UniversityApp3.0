@@ -2,7 +2,8 @@ from django.urls import path
 from .views import home, UniversityListView, UniversityDetailView, DegreeDetailView, SubjectDetailView, \
     UniversityCreateView, UniversityEditView, UniversityDeleteView, \
     DegreeCreateView, DegreeEditView, DegreeDeleteView, \
-    SubjectCreateView, SubjectEditView, SubjectDeleteView, SubjectCommentCreate
+    SubjectCreateView, SubjectEditView, SubjectDeleteView, \
+    SubjectCommentCreate, SubjectCommentDelete, SubjectCommentEdit
 from .views import universities_mock, university_mock, degree_mock, subject_mock
 
 
@@ -25,12 +26,12 @@ urlpatterns = [
     path('degree/<int:pkd>/subject/<int:pk>/update/', SubjectEditView.as_view(), name='update-subject'),
     path('degree/<int:pkd>/subject/<int:pk>/delete/', SubjectDeleteView.as_view(), name='delete-subject'),
     # Editar reviews
-    path('subject/<int:pk>/comment/new', SubjectCommentCreate.as_view(), name='add-comment'),
     path('degree/<int:pkd>/subject/<int:pk>/new/', SubjectEditView.as_view(), name='update-review'),
 
     # Editar comment
-    # path('subject/<int:pks>/comment<int:pk>/update/', SubjectCommentEdit.as_view(), name='update-comment'),
-    # path('subject/<int:pks>/comment/<int:pk>/delete/', SubjectCommentDelete.as_view(), name='delete-comment'),
+    path('subject/<int:pk>/comment/new', SubjectCommentCreate.as_view(), name='add-comment'),
+    path('comment/<int:pk>/update/', SubjectCommentEdit.as_view(), name='update-comment'),
+    path('comment/<int:pk>/delete/', SubjectCommentDelete.as_view(), name='delete-comment'),
     # path('universities/', universities_mock, name='universities'),
     # path('university/', university_mock, name='university'),
     # path('degree/', degree_mock, name='degree'),

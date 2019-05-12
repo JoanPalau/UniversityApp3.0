@@ -21,20 +21,23 @@ class University(models.Model):
 
     name = models.CharField(max_length=64)
     description = models.TextField()
-    # picture = models.CharField(max_length=32, default='noimage.png', blank=True, null=True)
     picture = models.ImageField(default='noimage.png', upload_to='university_pics')
-    # telephone = models.CharField(max_length=12, blank=True)  # validators=[validate_phone_number],
-    location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # Location
 
     address = models.CharField(max_length=64, blank=True, null=True)
-    zipcode = models.CharField(max_length=8, blank=True, null=True)
+    zipcode = models.CharField(max_length=12, blank=True, null=True)
     city = models.CharField(max_length=32, blank=True, null=True)
     country = models.CharField(max_length=32, blank=True, null=True)
     lat = models.FloatField(verbose_name='Latitude', validators=[MaxValueValidator(90), MinValueValidator(-90)], blank=True, null=True)
     long = models.FloatField(verbose_name='Longitude', validators=[MaxValueValidator(180), MinValueValidator(-180)], blank=True, null=True)
+
+    # Depreciated fields
+
+    # picture = models.CharField(max_length=32, default='noimage.png', blank=True, null=True)
+    # telephone = models.CharField(max_length=12, blank=True)  # validators=[validate_phone_number],
+    # location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} City: {} Address: {}".format(self.name, self.city, self.address)

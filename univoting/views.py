@@ -43,7 +43,7 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
 
 class UniversityEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = University
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'address', 'city', 'country', 'zipcode', 'lat', 'long', 'picture']
     template_name = 'univoting/university-register.html'
 
     def test_func(self):
@@ -83,7 +83,7 @@ class UniversityDetailView(DetailView):
 class DegreeCreateView(LoginRequiredMixin, CreateView):
     model = Degree
     fields = ('title', 'ects', 'description')
-    template_name = 'univoting/university-register.html'
+    template_name = 'univoting/create_edit_template.html'
 
     def form_valid(self, form):
         form.instance.university = get_object_or_404(University, pk=self.kwargs['pk'])
@@ -94,7 +94,7 @@ class DegreeCreateView(LoginRequiredMixin, CreateView):
 class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Degree
     fields = ('title', 'ects', 'description')
-    template_name = 'univoting/university-register.html'
+    template_name = 'univoting/create_edit_template.html'
 
     def test_func(self):
         degree = self.get_object()
@@ -146,7 +146,7 @@ class DegreeDetailView(DetailView):
 class SubjectCreateView(LoginRequiredMixin, CreateView):
     model = Subject
     fields = ('name', 'ects', 'description', '_course')
-    template_name = 'univoting/university-register.html'
+    template_name = 'univoting/create_edit_template.html'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -157,7 +157,7 @@ class SubjectCreateView(LoginRequiredMixin, CreateView):
 class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Subject
     fields = ('name', 'ects', 'description')
-    template_name = 'univoting/university-register.html'
+    template_name = 'univoting/create_edit_template.html'
 
     def test_func(self):
         subject = self.get_object()

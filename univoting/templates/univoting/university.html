@@ -91,8 +91,8 @@
 
             <script>
 
-                var latitud = {{university.location.lat}};
-                var longitud = {{university.location.long}};
+                var latitud = {{university.lat}};
+                var longitud = {{university.long}};
 
                 <!-- Creating and centering map to the university location -->
                 var mymap = L.map('map').setView([latitud, longitud], 13);
@@ -109,7 +109,7 @@
                 L.marker([latitud, longitud]).addTo(mymap);
 
                 var uniName = "{{ university.name }}";
-                var uniAddress = "{{ university.location.address }}";
+                var uniAddress = "{{ university.address }}"+", "+"{{ university.city }}"+", "+"{{ university.zipcode }}"+", "+"{{ university.country }}";
                 var popUpText = "<b>"+uniName+"</b><br />"+uniAddress;
 
                 <!-- Adding the name and the address of the university in the marker-->

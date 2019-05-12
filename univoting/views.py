@@ -209,7 +209,7 @@ class SubjectCommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.created_by:
+        if self.request.user == university.author:
             return True
         return False
 
@@ -225,7 +225,7 @@ class SubjectCommentDelete(LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         university = self.get_object()
-        if self.request.user == university.created_by:
+        if self.request.user == university.author:
             return True
         return False
 

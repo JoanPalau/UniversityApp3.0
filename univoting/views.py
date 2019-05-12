@@ -8,6 +8,7 @@ from univoting.models.degree import University
 from univoting.models.subject_review import SubjectReview
 from univoting.models.subject_comment import SubjectComment
 from django.urls import reverse_lazy
+from datetime import date
 
 
 def home(request):
@@ -199,6 +200,34 @@ class SubjectCommentCreate(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         form.instance.subject = Subject.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
+
+
+class SubjectCommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = SubjectComment
+    fields = ('comment',)
+    template_name = 'univoting/create_edit_template.html'
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.created_by:
+            return True
+        return False
+
+    def form_valid(self, form):
+        form.instance.date = date.today()
+        return super().form_valid(form)
+
+
+class SubjectCommentDelete(LoginRequiredMixin, DeleteView):
+    model = Subject
+    template_name = 'univoting/confirm_comment_delete.html'
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        university = self.get_object()
+        if self.request.user == university.created_by:
+            return True
+        return False
 
 
 def get_top_for_degrees(maximum, listed):

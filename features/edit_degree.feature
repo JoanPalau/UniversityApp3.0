@@ -15,4 +15,11 @@ Feature: Edit Degree
 
   Scenario: Edit owned degree
     Given I login as user "user1" with password "password"
-    # When I'm viewing the details page for degree at University "The University" by "User1"
+    When I view the details for degree "First degree"
+    And I edit the current degree
+      | title       | description                 |
+      | New Degree  | This is a new description.  |
+    Then I'm viewing the details page for degree at University "The University" by "user1"
+      | title       | description                 |
+      | New Degree  | This is a new description.  |
+    And There are 1 degree

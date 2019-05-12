@@ -56,14 +56,14 @@ def step_impl(context, count):
     assert count == Degree.objects.count()
 
 
-'''
 @when('I edit the current degree')
 def step_impl(context):
-    context.browser.find_link_by_text('edit').click()
+    # context.browser.find_link_by_text('Edit').click()
+    context.browser.find_by_id('edit').click()
     # TODO: Test also using direct edit view link
     # context.browser.visit(context.get_url('degree_edit', degree.pk))
     form = context.browser.find_by_tag('form').first
     for heading in context.table.headings:
         context.browser.fill(heading, context.table[0][heading])
     form.find_by_value('Submit').first.click()
-'''
+

@@ -71,6 +71,14 @@
                 </p>
               </div>
               <div class="card-footer bg-transparent border-success">{{ comment.date }}</div>
+              {% if user.is_authenticated and user == comment.author %}
+                <a id="edit" href="{% url 'update-comment' comment.id %}">
+                  <i class="fas fa-edit"></i>Edit
+                </a>
+                <a id="delete" style="margin-left: 12em" href="{% url 'delete-comment' comment.id %}">
+                  <i class="fas fa-eraser"></i>Delete
+                </a>
+              {% endif %}
             </div>
           {% endfor %}
         {% endif %}

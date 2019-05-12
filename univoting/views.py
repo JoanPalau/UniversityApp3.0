@@ -97,8 +97,8 @@ class DegreeEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'univoting/university-register.html'
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.created_by:
+        degree = self.get_object()
+        if self.request.user == degree.created_by:
             return True
         return False
 
@@ -109,8 +109,8 @@ class DegreeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('home')
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.created_by:
+        degree = self.get_object()
+        if self.request.user == degree.created_by:
             return True
         return False
 
@@ -160,8 +160,8 @@ class SubjectEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'univoting/university-register.html'
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.created_by:
+        subject = self.get_object()
+        if self.request.user == subject.created_by:
             return True
         return False
 
@@ -172,8 +172,8 @@ class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('home')
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.created_by:
+        subject = self.get_object()
+        if self.request.user == subject.created_by:
             return True
         return False
 
@@ -208,8 +208,8 @@ class SubjectCommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'univoting/create_edit_template.html'
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.author:
+        comment = self.get_object()
+        if self.request.user == comment.author:
             return True
         return False
 
@@ -219,13 +219,13 @@ class SubjectCommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class SubjectCommentDelete(LoginRequiredMixin, DeleteView):
-    model = Subject
+    model = SubjectComment
     template_name = 'univoting/confirm_comment_delete.html'
     success_url = reverse_lazy('home')
 
     def test_func(self):
-        university = self.get_object()
-        if self.request.user == university.author:
+        comment = self.get_object()
+        if self.request.user == comment.author:
             return True
         return False
 

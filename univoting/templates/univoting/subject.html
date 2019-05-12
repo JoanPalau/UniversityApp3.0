@@ -64,14 +64,13 @@
         {% else %}
           {% for comment in comments %}
             <div class="card border-success mb-3">
-              <div class="card-header bg-transparent border-success">User name</div>
+              <div class="card-header bg-transparent border-success">{{ comment.author }}</div>
               <div class="card-body text-success">
-                <h5 class="card-title">comment</h5>
                 <p class="card-text">
-                  {{ comment }}
+                  {{ comment.comment }}
                 </p>
               </div>
-              <div class="card-footer bg-transparent border-success">Date</div>
+              <div class="card-footer bg-transparent border-success">{{ comment.date }}</div>
             </div>
           {% endfor %}
         {% endif %}

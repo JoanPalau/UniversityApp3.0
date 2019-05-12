@@ -1,14 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-# from univoting.forms import UniversityForm
 from univoting.models.degree import Degree
 from univoting.models.subject import Subject
 from univoting.models.course import Course
 from univoting.models.degree import University
 from univoting.models.subject_review import SubjectReview
 from univoting.models.subject_comment import SubjectComment
-from univoting.forms import SubjectCreateForm
 from django.urls import reverse_lazy
 
 
@@ -39,7 +37,6 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
-        # afegir aqui el obtenir la localitzacio
         return super().form_valid(form)
 
 
@@ -180,26 +177,6 @@ class SubjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-class SubjectReviewUpdateView(LoginRequiredMixin, UpdateView):
-    model = SubjectReview
-    fields = ('mark', 'difficulty', 'work_volume')
-    template_name = 'univoting/university-register.html'
-
-    def form_valid(self, form):
-        values = {'pk': self.kwargs['pk'],
-                  'mark': form.instance.mark,
-                  'difficulty': form.instance.difficulty,
-                  'work_volume': form.instance.work_volume,
-                  }
-        update_subject(values)
-        return super().form_valid(form)
-
-
-def update_subject(values):
-    subject = get_object_or_404(Subject, pk=values['pk'])
-    subject.review.recalculate_score_on_insert(values['mark'], values['difficulty'], values['work_volume'])
-
-
 class SubjectDetailView(DetailView):
     model = Subject
     context_object_name = 'subject'
@@ -333,3 +310,28 @@ def subject_mock(request):
 
 #####################################################################################################
 #
+
+# Funcions en desús
+#####################################################################################################
+"""
+class SubjectReviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = SubjectReview
+    fields = ('mark', 'difficulty', 'work_volume')
+    template_name = 'univoting/university-register.html'
+
+    def form_valid(self, form):
+        values = {'pk': self.kwargs['pk'],
+                  'mark': form.instance.mark,
+                  'difficulty': form.instance.difficulty,
+                  'work_volume': form.instance.work_volume,
+                  }
+        update_subject(values)
+        return super().form_valid(form)
+
+
+def update_subject(values):
+    subject = get_object_or_404(Subject, pk=values['pk'])
+    subject.review.recalculate_score_on_insert(values['mark'], values['difficulty'], values['work_volume'])
+    
+    
+"""

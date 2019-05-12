@@ -34,8 +34,8 @@
     <div class="col-md-6 mr-5">
       <h3 class="heading mt-2 text-center">{{ subject.name }}</h3>
 
-      <div class="subject-box" , id="textbox">
-        {% if subject.review %}
+      <div class="subject-box" id="textbox">
+        {% if subject.review and subject.review.amount > 0 %}
           <h5 class="alignleft mt-2 ml-2">Difficulty: {{ subject.review.get_difficulty_rpr }}</h5>
           <h5 class="alignright mt-2 mr-2">Mark: {{ subject.review.get_mark_rpr }}</h5>
         {% endif %}
@@ -45,7 +45,7 @@
         {{ subject.description }}
       </p>
       <hr/>
-      {% if subject.review %}
+      {% if subject.review and subject.review.amount > 0 %}
         <h5 class="alignleft mt-2 mr-2">Work volume: {{ subject.review.get_rpr }}</h5>
       {% endif %}
       <h5 class="alignright mt-2 mr-2">Ects: {{ subject.ects }}</h5>

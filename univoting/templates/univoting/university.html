@@ -21,108 +21,128 @@
 
 {% block content %}
   <!-- Header -->
-  <div class="jumbotron container-fluid">
-    <h3 class="heading mt-2 text-center">{{ university.name }}</h3>
-    <div class="heading-underline"></div>
-  </div>
-
-  <div id="content" class="container">
-    <div class="col-md-12">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'universities' %}">Universities</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-        </ol>
-      </nav>
+  <span vocab="http://schema.org/" typeof="EducationalOrganization">
+    <div class="jumbotron container-fluid">
+        <h3 class="heading mt-2 text-center">
+          <span property="name">{{ university.name }}</span>
+        </h3>
+      <div class="heading-underline"></div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="header-content-left">
-          <div class="media">
-            <img src="{{ university.picture.url }}" alt="{{ university.name }} campus" style="width: 100%;">
+    <div id="content" class="container">
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'universities' %}">Universities</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+          </ol>
+        </nav>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="header-content-left">
+            <div class="media">
+              <span property="image">
+                <img src="{{ university.picture.url }}" alt="{{ university.name }} campus" style="width: 100%;">
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div id="description" class="header-content-right">
+            {% if user.is_authenticated and user == university.created_by %}
+              <a id="edit" href="{% url 'update-university' university.id %}">
+                <i class="fas fa-edit"></i>Edit
+              </a>
+              <a id="delete" style="margin-left: 12em" href="{% url 'delete-university' university.id %}">
+                <i class="fas fa-eraser"></i>Delete
+              </a>
+            {% endif %}
+            <h3 class="mt-4">Welcome to our campus</h3>
+            <span></span>
+            <p class="mt-4">
+              <span property="description">{{ university.description }}</span>
+            </p>
           </div>
         </div>
       </div>
+      <span rel="hasOfferCatalog">
+        <span typeof="OfferCatalog">
+          <span rel="itemListElement">
+            <span typeof="Course">
+              <div id="degrees-group" class="row mb-4">
+                <div class="col-md-6">
+                  <div class="header-degrees">
+                    {% if user.is_authenticated %}
+                      <a href="{% url 'new-degree' university.id %}">
+                        <i class="fas fa-pen" style="font-size: 1.5em"> Degrees</i>
+                      </a>
+                    {% else %}
+                      <h3>Degrees</h3>
+                    {% endif %}
+                  </div>
+                  <ul style="margin-top: 1em" class="list-group">
+                    {% for degree in degrees %}
+                      <li class="list-group-item">
+                        <span property="name">
+                          <a id="{{ degree.title }}"
+                             class="ml-4"
+                             href="{% url 'degree' degree.pk %}">{{ degree.title }}</a>
+                        </span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </span>
+          </span>
+        </span>
+      </span>
+        <div class="col-md-6 my-2" style="min-height: 400px">
+            <div id="map"></div>
 
-      <div class="col-md-6">
+              <script
+                  src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
+              </script>
 
-        <div id="description" class="header-content-right">
-          {% if user.is_authenticated and user == university.created_by %}
-            <a id="edit" href="{% url 'update-university' university.id %}">
-              <i class="fas fa-edit"></i>Edit
-            </a>
-            <a id="delete" style="margin-left: 12em" href="{% url 'delete-university' university.id %}">
-              <i class="fas fa-eraser"></i>Delete
-            </a>
-          {% endif %}
-          <h3 class="mt-4">Welcome to our campus</h3>
-          <span></span>
-          <p class="mt-4">
-            {{ university.description }}
-          </p>
+              <script>
+
+                  var latitud = {{university.lat}};
+                  var longitud = {{university.long}};
+
+                  <!-- Creating and centering map to the university location -->
+                  var mymap = L.map('map').setView([latitud, longitud], 16);
+
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                  maxZoom: 18,
+                  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                  id: 'mapbox.streets'
+                }).addTo(mymap);
+
+                  <!-- Adding marker at the university location -->
+                  L.marker([latitud, longitud]).addTo(mymap);
+
+                  var uniName = "{{ university.name }}";
+                  var uniAddress = "{{ university.address }}"+", "+"{{ university.city }}"+", "+"{{ university.zipcode }}"+", "+"{{ university.country }}";
+                  var popUpText = "<b>"+uniName+"</b><br />"+uniAddress;
+
+                  <!-- Adding the name and the address of the university in the marker-->
+                  L.marker([latitud, longitud]).addTo(mymap)
+                  .bindPopup(popUpText).openPopup();
+
+              </script>
+            </div>
         </div>
       </div>
     </div>
+  </span>
 
-    <div id="degrees-group" class="row mb-4">
-      <div class="col-md-6">
-        <div class="header-degrees">
-          {% if user.is_authenticated %}
-            <a href="{% url 'new-degree' university.id %}">
-              <i class="fas fa-pen" style="font-size: 1.5em"> Degrees</i>
-            </a>
-          {% else %}
-            <h3>Degrees</h3>
-          {% endif %}
-        </div>
-        <ul style="margin-top: 1em" class="list-group">
-          {% for degree in degrees %}
-            <li class="list-group-item">
-              <a id="{{ degree.title }}" class="ml-4" href="{% url 'degree' degree.pk %}"> {{ degree.title }} </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="col-md-6 my-2" style="min-height: 400px">
-          <div id="map"></div>
-
-            <script
-                src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-            </script>
-
-            <script>
-
-                var latitud = {{university.lat}};
-                var longitud = {{university.long}};
-
-                <!-- Creating and centering map to the university location -->
-                var mymap = L.map('map').setView([latitud, longitud], 16);
-
-            	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            		maxZoom: 18,
-            		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            		id: 'mapbox.streets'
-            	}).addTo(mymap);
-
-                <!-- Adding marker at the university location -->
-                L.marker([latitud, longitud]).addTo(mymap);
-
-                var uniName = "{{ university.name }}";
-                var uniAddress = "{{ university.address }}"+", "+"{{ university.city }}"+", "+"{{ university.zipcode }}"+", "+"{{ university.country }}";
-                var popUpText = "<b>"+uniName+"</b><br />"+uniAddress;
-
-                <!-- Adding the name and the address of the university in the marker-->
-                L.marker([latitud, longitud]).addTo(mymap)
-            		.bindPopup(popUpText).openPopup();
-
-            </script>
-
-      </div>
-    </div>
-  </div>
 
 {% endblock content %}
